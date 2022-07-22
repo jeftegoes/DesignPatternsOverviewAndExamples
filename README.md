@@ -26,8 +26,8 @@
   - Adapter
   - Bridge
   - Composite
-  - Decorator
-  - Façade
+  - **Decorator**
+  - **Façade**
   - Flyweight
   - Proxy
 - Behavioral
@@ -40,6 +40,7 @@
   - Null Object
   - Observer
   - State
-  - Strategy
-  - Template Method
-  - Visitor
+  - **Strategy**
+  - **Specification**
+  - **Template Method**
+  - **Visitor**
