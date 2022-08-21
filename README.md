@@ -7,6 +7,7 @@
 - [Gamma categorization](#gamma-categorization)
 - [Builder](#builder)
   - [Motivation](#motivation)
+- [Façade](#façade)
 
 # 1. Overview
 
@@ -75,3 +76,19 @@
 - Having an object with 10 constructor arguments is not productive.
 - Instead, opt for piecewise construction.
 - Builder provides an API for constructing an object step-by-step.
+
+# Façade
+
+- Exposing several components through a single interface.
+- Balancing complexity and presentation/usability.
+  - Typical home:
+    - Many subsystems (electrical, sanitation).
+    - Complex internal structure (e.g. floor layers).
+    - End user is not exposed to internals.
+  - Same with software:
+    - Many systems working to provide flexibility.
+    - API consumers want it to "just work".
+- Provides a simple, easy to understand/user interface over a large and sophisticated body of code.
+- Build a Façade to provide a simplified API over a set of classes.
+- May with to (optionally) expose internal through the Façade.
+- May allow users to "Escalate" to use more complex APIs if they need to.
