@@ -4,10 +4,13 @@
 
 - [1. Overview](#1-overview)
 - [2. The Patterns](#2-the-patterns)
-- [Gamma categorization](#gamma-categorization)
-- [Builder](#builder)
-  - [Motivation](#motivation)
-- [Façade](#façade)
+- [3. Gamma categorization](#3-gamma-categorization)
+- [4. Creational](#4-creational)
+  - [4.1. Builder](#41-builder)
+    - [4.1.1. Motivation](#411-motivation)
+- [5. Structural](#5-structural)
+  - [Bridge](#bridge)
+  - [5.1. Façade](#51-façade)
 
 # 1. Overview
 
@@ -20,12 +23,12 @@
 # 2. The Patterns
 
 - Creational
-  - Builder
+  - **Builder**
   - Factories
     - Abstract factory
     - Factory Method
   - Prototype
-  - Singleton
+  - **Singleton**
 - Structural
   - Adapter
   - Bridge
@@ -49,7 +52,7 @@
   - **Template Method**
   - **Visitor**
 
-# Gamma categorization
+# 3. Gamma categorization
 
 - Design Patters are typically split in to three categories.
 - This is called Gamma Categorization after Erick Gamma, one of GoF authors.
@@ -64,12 +67,14 @@
 - Behavioral patterns:
   - They are all different, no central theme.
 
-# Builder
+# 4. Creational
+
+## 4.1. Builder
 
 - When construction gets a little bit too complicated.
 - When piecewise object construction is complicated, provide an API for doing it succinctly.
 
-## Motivation
+### 4.1.1. Motivation
 
 - Some objects are simple and can be created in a single constructor call.
 - Other objects require a lot of ceremony to create.
@@ -77,7 +82,21 @@
 - Instead, opt for piecewise construction.
 - Builder provides an API for constructing an object step-by-step.
 
-# Façade
+# 5. Structural
+
+## Bridge
+
+- Connecting components together through abstractions.
+- Bridge prevents a "Cartesian product" complexity explosion.
+- Bridge pattern avoids the entity explosion.
+- A mechanism that decouples an interface (hierarchy) from an implementation (hierarchy).
+- Decouple abstraction from implementation.
+- Both can exist as hierarchies.
+- A stronger form of encapsulation.
+
+## 5.1. Façade
+
+![Façade diagram](Images/UmlFa%C3%A7ade.png)
 
 - Exposing several components through a single interface.
 - Balancing complexity and presentation/usability.

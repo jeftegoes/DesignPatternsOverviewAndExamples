@@ -1,4 +1,4 @@
-namespace Facade
+namespace MagicSquare
 {
     public class Generator
     {

@@ -1,4 +1,4 @@
-﻿using Facade;
+﻿using MagicSquare;
 
 var magicSquareGenerator = new MagicSquareGenerator();
 
