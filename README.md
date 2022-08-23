@@ -9,8 +9,9 @@
   - [4.1. Builder](#41-builder)
     - [4.1.1. Motivation](#411-motivation)
 - [5. Structural](#5-structural)
-  - [Bridge](#bridge)
-  - [5.1. Façade](#51-façade)
+  - [5.1. Bridge](#51-bridge)
+  - [5.2. Composite](#52-composite)
+  - [5.3. Façade](#53-façade)
 
 # 1. Overview
 
@@ -84,7 +85,7 @@
 
 # 5. Structural
 
-## Bridge
+## 5.1. Bridge
 
 - Connecting components together through abstractions.
 - Bridge prevents a "Cartesian product" complexity explosion.
@@ -94,7 +95,18 @@
 - Both can exist as hierarchies.
 - A stronger form of encapsulation.
 
-## 5.1. Façade
+## 5.2. Composite
+
+- Treating individual and aggregate objects uniformly.
+- Objects use other object's firelds/properties/members through inheritance and composition.
+- Composition lets us make compound objects.
+  - E.g., a mathematical expression composed of simple expressions; or
+  - A grouping os thapes that consists of several shapes.
+- Composite design pattern is used to treat both single (scalar) and composite objects uniformly.
+  - I.e., `Foo` and `Collection<Foo>` have commong APIs.
+- A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
+
+## 5.3. Façade
 
 ![Façade diagram](Images/UmlFa%C3%A7ade.png)
 
