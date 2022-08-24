@@ -12,6 +12,7 @@
   - [5.1. Bridge](#51-bridge)
   - [5.2. Composite](#52-composite)
   - [5.3. Façade](#53-façade)
+- [Duck Typing Mixins](#duck-typing-mixins)
 
 # 1. Overview
 
@@ -123,3 +124,8 @@
 - Build a Façade to provide a simplified API over a set of classes.
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
+
+# Duck Typing Mixins
+
+- The `IScalar<T>` mixin is a real-world mixin.
+- It's used in situations where you want a 'true' implementation of a Composite pattern, i.e., when you want composite objects and scalar object to be both enumerable.
