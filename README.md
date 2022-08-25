@@ -12,7 +12,9 @@
   - [5.1. Bridge](#51-bridge)
   - [5.2. Composite](#52-composite)
   - [5.3. Façade](#53-façade)
-- [Duck Typing Mixins](#duck-typing-mixins)
+- [Behavioral](#behavioral)
+  - [Null Object](#null-object)
+- [6. Duck Typing Mixins](#6-duck-typing-mixins)
 
 # 1. Overview
 
@@ -99,12 +101,12 @@
 ## 5.2. Composite
 
 - Treating individual and aggregate objects uniformly.
-- Objects use other object's firelds/properties/members through inheritance and composition.
+- Objects use other object's fields/properties/members through inheritance and composition.
 - Composition lets us make compound objects.
   - E.g., a mathematical expression composed of simple expressions; or
-  - A grouping os thapes that consists of several shapes.
+  - A grouping of shapes that consists of several shapes.
 - Composite design pattern is used to treat both single (scalar) and composite objects uniformly.
-  - I.e., `Foo` and `Collection<Foo>` have commong APIs.
+  - I.e., `Foo` and `Collection<Foo>` have common APIs.
 - A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
 
 ## 5.3. Façade
@@ -125,7 +127,13 @@
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
 
-# Duck Typing Mixins
+# Behavioral
 
-- The `IScalar<T>` mixin is a real-world mixin.
+## Null Object
+
+- A behavioral design pattern with no behaviors.
+
+# 6. Duck Typing Mixins
+
+- The `IScalar<T>` mixing is a real-world mixing.
 - It's used in situations where you want a 'true' implementation of a Composite pattern, i.e., when you want composite objects and scalar object to be both enumerable.
