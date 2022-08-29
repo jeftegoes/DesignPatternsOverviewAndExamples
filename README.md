@@ -12,9 +12,12 @@
   - [5.1. Bridge](#51-bridge)
   - [5.2. Composite](#52-composite)
   - [5.3. Façade](#53-façade)
-- [Behavioral](#behavioral)
-  - [Null Object](#null-object)
-- [6. Duck Typing Mixins](#6-duck-typing-mixins)
+- [6. Behavioral](#6-behavioral)
+  - [6.1. Null Object](#61-null-object)
+  - [6.2. Template Method](#62-template-method)
+    - [6.2.1. Motivation](#621-motivation)
+    - [6.2.2. Resume](#622-resume)
+- [7. Duck Typing Mixins](#7-duck-typing-mixins)
 
 # 1. Overview
 
@@ -127,13 +130,35 @@
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
 
-# Behavioral
+# 6. Behavioral
 
-## Null Object
+## 6.1. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-# 6. Duck Typing Mixins
+## 6.2. Template Method
+
+- A high-level blueprint for an algorithm to be completed by inheritors.
+
+### 6.2.1. Motivation
+
+- Algorithms can be decomposed into common parts + specifics.
+- Strategy pattern does this through composition.
+  - High-level algorithm uses an interface.
+  - Concrete implementations implement the interface.
+- Template Method does the same thing through inheritance.
+  - Overall algorithm makes use of abstract member.
+  - Inheritors override the abstract members.
+  - Parent template method invoked.
+- Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
+
+### 6.2.2. Resume
+
+- Define an algorithm at a high level.
+- Define constituent parts as abstract method/properties.
+- Inherit the algorithm class providing necessary overrides.
+
+# 7. Duck Typing Mixins
 
 - The `IScalar<T>` mixing is a real-world mixing.
 - It's used in situations where you want a 'true' implementation of a Composite pattern, i.e., when you want composite objects and scalar object to be both enumerable.
