@@ -12,6 +12,8 @@
   - [5.1. Bridge](#51-bridge)
   - [5.2. Composite](#52-composite)
   - [5.3. Façade](#53-façade)
+    - [5.3.1. Motivation](#531-motivation)
+    - [5.3.2. Resume](#532-resume)
 - [6. Behavioral](#6-behavioral)
   - [6.1. Null Object](#61-null-object)
   - [6.2. Template Method](#62-template-method)
@@ -117,6 +119,9 @@
 ![Façade diagram](Images/UmlFa%C3%A7ade.png)
 
 - Exposing several components through a single interface.
+
+### 5.3.1. Motivation
+
 - Balancing complexity and presentation/usability.
   - Typical home:
     - Many subsystems (electrical, sanitation).
@@ -126,6 +131,9 @@
     - Many systems working to provide flexibility.
     - API consumers want it to "just work".
 - Provides a simple, easy to understand/user interface over a large and sophisticated body of code.
+
+### 5.3.2. Resume
+
 - Build a Façade to provide a simplified API over a set of classes.
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.

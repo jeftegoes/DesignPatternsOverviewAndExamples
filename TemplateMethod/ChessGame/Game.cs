@@ -1,4 +1,4 @@
-namespace GameChess
+namespace ChessGame
 {
     public abstract class Game
     {
