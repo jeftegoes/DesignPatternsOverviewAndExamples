@@ -1,5 +1,11 @@
-﻿using NullObjectWithIoC;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NullObjectWithIoC;
 
-// var log = new ConsoleLog();
-var bankAccount = new BankAccount(null);
+
+var collection = new ServiceCollection();
+collection.AddScoped<ILog, ConsoleLog>();
+collection.AddScoped<BankAccount>();
+
+var provider = collection.BuildServiceProvider();
+var bankAccount = provider.GetService<BankAccount>();
 bankAccount.Deposit(100);
