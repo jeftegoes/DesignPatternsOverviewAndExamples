@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonDatabase", "SingletonDatabase\SingletonDatabase.csproj", "{F11D1329-F8C4-4BB2-AA13-D5499C1781B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonDatabase.Test", "SingletonDatabase.Test\SingletonDatabase.Test.csproj", "{A11A5471-A722-4501-A0F5-8D44462D567B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F11D1329-F8C4-4BB2-AA13-D5499C1781B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F11D1329-F8C4-4BB2-AA13-D5499C1781B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F11D1329-F8C4-4BB2-AA13-D5499C1781B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F11D1329-F8C4-4BB2-AA13-D5499C1781B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A11A5471-A722-4501-A0F5-8D44462D567B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A11A5471-A722-4501-A0F5-8D44462D567B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A11A5471-A722-4501-A0F5-8D44462D567B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A11A5471-A722-4501-A0F5-8D44462D567B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
