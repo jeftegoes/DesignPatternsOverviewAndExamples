@@ -1,4 +1,4 @@
-﻿using SingletonDatabase;
+﻿using SingletonDatabaseWithUnitTest;
 
 var database = Database.Instance;
 var city = "Tokyo";

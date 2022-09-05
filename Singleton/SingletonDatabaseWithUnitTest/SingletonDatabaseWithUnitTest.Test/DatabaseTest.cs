@@ -1,4 +1,4 @@
-namespace SingletonDatabase
+namespace SingletonDatabaseWithUnitTest
 {
     public class DatabaseTest
     {

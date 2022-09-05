@@ -1,6 +1,6 @@
 using MoreLinq;
 
-namespace SingletonDatabase
+namespace SingletonDatabaseWithDependencyInjection
 {
     public class Database : IDatabase
     {
@@ -12,10 +12,10 @@ namespace SingletonDatabase
         public static Database Instance = _instance.Value;
         public static int Count => instanceCount;
 
-        public Database()
+        private Database()
         {
             instanceCount++;
-            Console.WriteLine("Initializing database.");
+            Console.WriteLine("Initializing Singleton Database.");
             var fileInfo = new FileInfo(typeof(IDatabase).Assembly.Location).DirectoryName;
 
             capitals = File.ReadAllLines(Path.Combine(fileInfo, "capitals.txt"))

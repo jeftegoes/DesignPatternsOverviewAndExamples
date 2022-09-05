@@ -1,4 +1,4 @@
-namespace SingletonDatabase
+namespace SingletonDatabaseWithDependencyInjection
 {
     public class DatabaseRecordFinder
     {

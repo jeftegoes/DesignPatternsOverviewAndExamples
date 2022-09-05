@@ -1,4 +1,4 @@
-namespace SingletonDatabase.Test
+namespace SingletonDatabaseWithUnitTest.Test
 {
     public class DatabaseRecordFinderTest
     {
