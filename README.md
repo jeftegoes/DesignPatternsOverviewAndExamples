@@ -4,22 +4,26 @@
 
 - [1. Overview](#1-overview)
 - [2. The Patterns](#2-the-patterns)
-- [3. Gamma categorization](#3-gamma-categorization)
-- [4. Creational](#4-creational)
-  - [4.1. Builder](#41-builder)
-    - [4.1.1. Motivation](#411-motivation)
-- [5. Structural](#5-structural)
-  - [5.1. Bridge](#51-bridge)
-  - [5.2. Composite](#52-composite)
-  - [5.3. Façade](#53-façade)
-    - [5.3.1. Motivation](#531-motivation)
-    - [5.3.2. Resume](#532-resume)
-- [6. Behavioral](#6-behavioral)
-  - [6.1. Null Object](#61-null-object)
-  - [6.2. Template Method](#62-template-method)
-    - [6.2.1. Motivation](#621-motivation)
-    - [6.2.2. Resume](#622-resume)
-- [7. Duck Typing Mixins](#7-duck-typing-mixins)
+- [3. Others patterns](#3-others-patterns)
+- [4. Gamma categorization](#4-gamma-categorization)
+- [5. Creational](#5-creational)
+  - [5.1. Builder](#51-builder)
+    - [5.1.1. Motivation](#511-motivation)
+  - [5.2. Singleton](#52-singleton)
+    - [5.2.1. Motivation](#521-motivation)
+    - [5.2.2. Resume](#522-resume)
+- [6. Structural](#6-structural)
+  - [6.1. Bridge](#61-bridge)
+  - [6.2. Composite](#62-composite)
+  - [6.3. Façade](#63-façade)
+    - [6.3.1. Motivation](#631-motivation)
+    - [6.3.2. Resume](#632-resume)
+- [7. Behavioral](#7-behavioral)
+  - [7.1. Null Object](#71-null-object)
+  - [7.2. Template Method](#72-template-method)
+    - [7.2.1. Motivation](#721-motivation)
+    - [7.2.2. Resume](#722-resume)
+- [8. Duck Typing Mixins](#8-duck-typing-mixins)
 
 # 1. Overview
 
@@ -61,7 +65,12 @@
   - **Template Method**
   - **Visitor**
 
-# 3. Gamma categorization
+# 3. Others patterns
+
+- Monostate
+- Ambient Context
+
+# 4. Gamma categorization
 
 - Design Patters are typically split in to three categories.
 - This is called Gamma Categorization after Erick Gamma, one of GoF authors.
@@ -76,14 +85,14 @@
 - Behavioral patterns:
   - They are all different, no central theme.
 
-# 4. Creational
+# 5. Creational
 
-## 4.1. Builder
+## 5.1. Builder
 
 - When construction gets a little bit too complicated.
 - When piecewise object construction is complicated, provide an API for doing it succinctly.
 
-### 4.1.1. Motivation
+### 5.1.1. Motivation
 
 - Some objects are simple and can be created in a single constructor call.
 - Other objects require a lot of ceremony to create.
@@ -91,9 +100,30 @@
 - Instead, opt for piecewise construction.
 - Builder provides an API for constructing an object step-by-step.
 
-# 5. Structural
+## 5.2. Singleton
 
-## 5.1. Bridge
+### 5.2.1. Motivation
+
+- For some components it only makes sense to have one in the system:
+  - Database repository.
+  - Object factory.
+- E.g., the constructor call is expensive:
+  - We only do it once.
+  - We provide everyone with the same instance.
+- Want to prevent anyone creating additional copies.
+- Need to take care of lazy instantiation and thread safety.
+- A component which is instantiated only once.
+
+### 5.2.2. Resume
+
+- Making a 'safe' singleton is easy: construct a static `Lazy<T>` and return its `Value`.
+- Singletons are diffult to test.
+- Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
+- Consider defining singleton lifetime in DI container.
+
+# 6. Structural
+
+## 6.1. Bridge
 
 - Connecting components together through abstractions.
 - Bridge prevents a "Cartesian product" complexity explosion.
@@ -103,7 +133,7 @@
 - Both can exist as hierarchies.
 - A stronger form of encapsulation.
 
-## 5.2. Composite
+## 6.2. Composite
 
 - Treating individual and aggregate objects uniformly.
 - Objects use other object's fields/properties/members through inheritance and composition.
@@ -114,13 +144,13 @@
   - I.e., `Foo` and `Collection<Foo>` have common APIs.
 - A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
 
-## 5.3. Façade
+## 6.3. Façade
 
 ![Façade diagram](Images/UmlFa%C3%A7ade.png)
 
 - Exposing several components through a single interface.
 
-### 5.3.1. Motivation
+### 6.3.1. Motivation
 
 - Balancing complexity and presentation/usability.
   - Typical home:
@@ -132,23 +162,23 @@
     - API consumers want it to "just work".
 - Provides a simple, easy to understand/user interface over a large and sophisticated body of code.
 
-### 5.3.2. Resume
+### 6.3.2. Resume
 
 - Build a Façade to provide a simplified API over a set of classes.
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
 
-# 6. Behavioral
+# 7. Behavioral
 
-## 6.1. Null Object
+## 7.1. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-## 6.2. Template Method
+## 7.2. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 6.2.1. Motivation
+### 7.2.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -160,13 +190,13 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 6.2.2. Resume
+### 7.2.2. Resume
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
 
-# 7. Duck Typing Mixins
+# 8. Duck Typing Mixins
 
 - The `IScalar<T>` mixing is a real-world mixing.
 - It's used in situations where you want a 'true' implementation of a Composite pattern, i.e., when you want composite objects and scalar object to be both enumerable.
