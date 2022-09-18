@@ -18,8 +18,11 @@
   - [6.3. Façade](#63-façade)
     - [6.3.1. Motivation](#631-motivation)
     - [6.3.2. Resume](#632-resume)
+  - [6.4. Command](#64-command)
 - [7. Behavioral](#7-behavioral)
   - [7.1. Null Object](#71-null-object)
+    - [7.1.1. Motivation](#711-motivation)
+    - [7.1.2. Resume](#712-resume)
   - [7.2. Template Method](#72-template-method)
     - [7.2.1. Motivation](#721-motivation)
     - [7.2.2. Resume](#722-resume)
@@ -43,7 +46,7 @@
   - Prototype
   - **Singleton**
 - Structural
-  - Adapter
+  - **Adapter**
   - Bridge
   - Composite
   - **Decorator**
@@ -55,7 +58,7 @@
   - Command
   - Interpreter
   - Iterator
-  - Mediator
+  - **Mediator**
   - Memento
   - Null Object
   - Observer
@@ -168,11 +171,35 @@
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
 
+## 6.4. Command
+
+
+
 # 7. Behavioral
 
 ## 7.1. Null Object
 
 - A behavioral design pattern with no behaviors.
+
+### 7.1.1. Motivation
+
+- When component `A` uses component `B`, it typically assumes that `B` is non-null.
+  - You inject `B`, not `B?` or some `Option<B>`.
+  - You do not check for null (?.) on every call.
+- There is no option of telling `A` not to use an instance of `B`:
+  - Its use is hard-coded.
+  - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
+- A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
+
+### 7.1.2. Resume
+
+- Implement the required interface.
+- Rewrite the methods with empty bodies:
+  - If method is non-void, `return default(T)`.
+  - If these values are ever used, you are in trouble.
+- Supply an instance of Null Object in place of actual object.
+- Dynamic construction possible.
+  - With associated performance implications.
 
 ## 7.2. Template Method
 
