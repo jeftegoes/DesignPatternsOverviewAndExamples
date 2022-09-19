@@ -15,17 +15,21 @@
 - [6. Structural](#6-structural)
   - [6.1. Bridge](#61-bridge)
   - [6.2. Composite](#62-composite)
+    - [6.2.1. Motivation](#621-motivation)
+    - [6.2.2. Resume](#622-resume)
   - [6.3. Façade](#63-façade)
     - [6.3.1. Motivation](#631-motivation)
     - [6.3.2. Resume](#632-resume)
-  - [6.4. Command](#64-command)
 - [7. Behavioral](#7-behavioral)
-  - [7.1. Null Object](#71-null-object)
+  - [7.1. Command](#71-command)
     - [7.1.1. Motivation](#711-motivation)
     - [7.1.2. Resume](#712-resume)
-  - [7.2. Template Method](#72-template-method)
+  - [7.2. Null Object](#72-null-object)
     - [7.2.1. Motivation](#721-motivation)
     - [7.2.2. Resume](#722-resume)
+  - [7.3. Template Method](#73-template-method)
+    - [7.3.1. Motivation](#731-motivation)
+    - [7.3.2. Resume](#732-resume)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 
 # 1. Overview
@@ -139,6 +143,9 @@
 ## 6.2. Composite
 
 - Treating individual and aggregate objects uniformly.
+
+### 6.2.1. Motivation
+
 - Objects use other object's fields/properties/members through inheritance and composition.
 - Composition lets us make compound objects.
   - E.g., a mathematical expression composed of simple expressions; or
@@ -146,6 +153,14 @@
 - Composite design pattern is used to treat both single (scalar) and composite objects uniformly.
   - I.e., `Foo` and `Collection<Foo>` have common APIs.
 - A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
+
+### 6.2.2. Resume
+
+- Objects can use other objects via inheritance/composition.
+- Some composed and singular objects need similar/identical behaviors.
+- Composite design pattern lets us treat both types of object uniformly.
+- C# has special support for the enumeration concept.
+- A single object can masquerade as collection with `yield return this`.
 
 ## 6.3. Façade
 
@@ -171,17 +186,36 @@
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
 
-## 6.4. Command
-
-
-
 # 7. Behavioral
 
-## 7.1. Null Object
+## 7.1. Command
+
+- You shall not pass!
+
+### 7.1.1. Motivation
+
+- Ordinary C# statements are perishable.
+  - Cannot undo a field/property assignment.
+  - Cannot directly serialize a sequence of action (calls).
+- Want an object that represents an operation.
+  - X should change its property Y to Z.
+  - X should do W().
+- Uses: GUI commands, multi-level undo/redo, macro recording and more!
+- An object which represents an instruction to perform a particular action.
+  - Contains all the information necessary for the action to be taken.
+
+### 7.1.2. Resume
+
+- Encapsulate all details of an operation in separate object.
+- Define instruction for applying the command (either in the command itself, or elsewhere).
+- Optionally define instruction for undoing the command.
+- Can create composite commands (a.k.a macros).
+
+## 7.2. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-### 7.1.1. Motivation
+### 7.2.1. Motivation
 
 - When component `A` uses component `B`, it typically assumes that `B` is non-null.
   - You inject `B`, not `B?` or some `Option<B>`.
@@ -191,7 +225,7 @@
   - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
 - A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
 
-### 7.1.2. Resume
+### 7.2.2. Resume
 
 - Implement the required interface.
 - Rewrite the methods with empty bodies:
@@ -201,11 +235,11 @@
 - Dynamic construction possible.
   - With associated performance implications.
 
-## 7.2. Template Method
+## 7.3. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 7.2.1. Motivation
+### 7.3.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -217,7 +251,7 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.2.2. Resume
+### 7.3.2. Resume
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
