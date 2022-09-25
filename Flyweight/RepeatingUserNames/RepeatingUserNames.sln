@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepeatingUserNames", "RepeatingUserNames\RepeatingUserNames.csproj", "{8A6F9D87-6D25-4A1E-94ED-6CE24367319D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepeatingUserNames.Tests", "RepeatingUserNames.Tests\RepeatingUserNames.Tests.csproj", "{EC813DEA-E673-4242-AB49-AD148E534F7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A6F9D87-6D25-4A1E-94ED-6CE24367319D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6F9D87-6D25-4A1E-94ED-6CE24367319D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6F9D87-6D25-4A1E-94ED-6CE24367319D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6F9D87-6D25-4A1E-94ED-6CE24367319D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC813DEA-E673-4242-AB49-AD148E534F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC813DEA-E673-4242-AB49-AD148E534F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC813DEA-E673-4242-AB49-AD148E534F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC813DEA-E673-4242-AB49-AD148E534F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
