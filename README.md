@@ -11,37 +11,43 @@
     - [5.1.1. Motivation](#511-motivation)
   - [5.2. Singleton](#52-singleton)
     - [5.2.1. Motivation](#521-motivation)
-    - [5.2.2. Resume](#522-resume)
+    - [5.2.2. Summary](#522-summary)
 - [6. Structural](#6-structural)
-  - [6.1. Bridge](#61-bridge)
-  - [6.2. Composite](#62-composite)
-    - [6.2.1. Motivation](#621-motivation)
-    - [6.2.2. Resume](#622-resume)
-  - [6.3. Façade](#63-façade)
+  - [6.1. Adapter](#61-adapter)
+    - [6.1.1. Motivation](#611-motivation)
+    - [6.1.2. Summary](#612-summary)
+  - [6.2. Bridge](#62-bridge)
+  - [6.3. Composite](#63-composite)
     - [6.3.1. Motivation](#631-motivation)
-    - [6.3.2. Resume](#632-resume)
-  - [6.4. Flyweight](#64-flyweight)
+    - [6.3.2. Summary](#632-summary)
+  - [6.4. Façade](#64-façade)
     - [6.4.1. Motivation](#641-motivation)
-    - [6.4.2. Resume](#642-resume)
+    - [6.4.2. Summary](#642-summary)
+  - [6.5. Flyweight](#65-flyweight)
+    - [6.5.1. Motivation](#651-motivation)
+    - [6.5.2. Summary](#652-summary)
 - [7. Behavioral](#7-behavioral)
   - [7.1. Command](#71-command)
     - [7.1.1. Motivation](#711-motivation)
-    - [7.1.2. Resume](#712-resume)
+    - [7.1.2. Summary](#712-summary)
   - [7.2. Null Object](#72-null-object)
     - [7.2.1. Motivation](#721-motivation)
-    - [7.2.2. Resume](#722-resume)
+    - [7.2.2. Summary](#722-summary)
   - [7.3. Template Method](#73-template-method)
     - [7.3.1. Motivation](#731-motivation)
-    - [7.3.2. Resume](#732-resume)
+    - [7.3.2. Summary](#732-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 
 # 1. Overview
 
 - Design pattern are common architectural approaches.
 - Popularized by the [Gang of Four book (1994)](http://wiki.c2.com/?GangOfFour).
+  - Smaltalk and C++
+- Translated to many OOP languages
+  - C#, Java, Python, ...
 - Universally relevant.
   - Internalized in some programming languages.
-  - Libraries
+  - Libraries.
 
 # 2. The Patterns
 
@@ -71,7 +77,6 @@
   - Observer
   - State
   - **Strategy**
-  - **Specification**
   - **Template Method**
   - **Visitor**
 
@@ -79,6 +84,7 @@
 
 - Monostate
 - Ambient Context
+- Specification
 
 # 4. Gamma categorization
 
@@ -124,7 +130,7 @@
 - Need to take care of lazy instantiation and thread safety.
 - A component which is instantiated only once.
 
-### 5.2.2. Resume
+### 5.2.2. Summary
 
 - Making a 'safe' singleton is easy: construct a static `Lazy<T>` and return its `Value`.
 - Singletons are difficult to test.
@@ -133,7 +139,28 @@
 
 # 6. Structural
 
-## 6.1. Bridge
+## 6.1. Adapter
+
+- Getting the interface you want from the interface you have.
+- A construct which adapt an existing interface X to conform to the required interface Y.
+
+### 6.1.1. Motivation
+
+- Electrical devices have different power (interface) requirements:
+  - Voltage (5V, 220V).
+  - Socket/plug type (Europe, UK, USA).
+- We cannot modify out gadgets to support every possible interface:
+  - Some support possible (e.g, 120/220V).
+- Thus, we use a special device (an adapter) to give us the interface we require from the interface we have.
+
+### 6.1.2. Summary
+
+- Implementing an Adapter is easy.
+- Determine the API you have and the API you need.
+- Create a component which aggregates (has a reference to, ...) the **adaptee**.
+- Intermediate representations can pile up: use **caching** and other optimizations.
+
+## 6.2. Bridge
 
 - Connecting components together through abstractions.
 - Bridge prevents a "Cartesian product" complexity explosion.
@@ -143,11 +170,11 @@
 - Both can exist as hierarchies.
 - A stronger form of encapsulation.
 
-## 6.2. Composite
+## 6.3. Composite
 
 - Treating individual and aggregate objects uniformly.
 
-### 6.2.1. Motivation
+### 6.3.1. Motivation
 
 - Objects use other object's fields/properties/members through inheritance and composition.
 - Composition lets us make compound objects.
@@ -157,7 +184,7 @@
   - I.e., `Foo` and `Collection<Foo>` have common APIs.
 - A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
 
-### 6.2.2. Resume
+### 6.3.2. Summary
 
 - Objects can use other objects via inheritance/composition.
 - Some composed and singular objects need similar/identical behaviors.
@@ -165,13 +192,13 @@
 - C# has special support for the enumeration concept.
 - A single object can masquerade as collection with `yield return this`.
 
-## 6.3. Façade
+## 6.4. Façade
 
 ![Façade diagram](Images/UmlFa%C3%A7ade.png)
 
 - Exposing several components through a single interface.
 
-### 6.3.1. Motivation
+### 6.4.1. Motivation
 
 - Balancing complexity and presentation/usability.
   - Typical home:
@@ -183,17 +210,17 @@
     - API consumers want it to "just work".
 - Provides a simple, easy to understand/user interface over a large and sophisticated body of code.
 
-### 6.3.2. Resume
+### 6.4.2. Summary
 
 - Build a Façade to provide a simplified API over a set of classes.
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
 
-## 6.4. Flyweight
+## 6.5. Flyweight
 
 - Space otimization!
 
-### 6.4.1. Motivation
+### 6.5.1. Motivation
 
 - Avoid redundancy when storing data.
 - E.G., MMORPG.
@@ -206,7 +233,7 @@
   - Operate on ranges (e.g., line number, start:end positions).
 - A space optimization technique that lets us use less memory by storing externally the data associated with similar objects.
 
-### 6.4.2. Resume
+### 6.5.2. Summary
 
 - Store common data externally.
 - Define the idea of "ranges" on homogeneous collections and store data related to those ranges.
@@ -230,7 +257,7 @@
 - An object which represents an instruction to perform a particular action.
   - Contains all the information necessary for the action to be taken.
 
-### 7.1.2. Resume
+### 7.1.2. Summary
 
 - Encapsulate all details of an operation in separate object.
 - Define instruction for applying the command (either in the command itself, or elsewhere).
@@ -251,7 +278,7 @@
   - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
 - A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
 
-### 7.2.2. Resume
+### 7.2.2. Summary
 
 - Implement the required interface.
 - Rewrite the methods with empty bodies:
@@ -277,7 +304,7 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.3.2. Resume
+### 7.3.2. Summary
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
