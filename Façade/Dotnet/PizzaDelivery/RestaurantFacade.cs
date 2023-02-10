@@ -2,33 +2,33 @@ namespace Restaurant
 {
     public class RestaurantFacade
     {
-        private IPizza _PizzaProvider;
-        private IBread _BreadProvider;
+        private IPizza _pizzaProvider;
+        private IBread _breadProvider;
 
         public RestaurantFacade()
         {
-            _PizzaProvider = new PizzaProvider();
-            _BreadProvider = new BreadProvider();
+            _pizzaProvider = new PizzaProvider();
+            _breadProvider = new BreadProvider();
         }
 
         public void GetNonVegPizza()
         {
-            _PizzaProvider.GetNonVegPizza();
+            _pizzaProvider.GetNonVegPizza();
         }
 
         public void GetVegPizza()
         {
-            _PizzaProvider.GetVegPizza();
+            _pizzaProvider.GetVegPizza();
         }
 
         public void GetGarlicBread()
         {
-            _BreadProvider.GetGarlicBread();
+            _breadProvider.GetGarlicBread();
         }
 
         public void GetCheesyGarlicBread()
         {
-            _BreadProvider.GetCheesyGarlicBread();
+            _breadProvider.GetCheesyGarlicBread();
         }
     }
 }
