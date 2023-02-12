@@ -9,6 +9,7 @@
 - [5. Creational](#5-creational)
   - [5.1. Builder](#51-builder)
     - [5.1.1. Motivation](#511-motivation)
+    - [5.1.2. Summary](#512-summary)
   - [5.2. Singleton](#52-singleton)
     - [5.2.1. Motivation](#521-motivation)
     - [5.2.2. Summary](#522-summary)
@@ -115,6 +116,13 @@
 - Having an object with 10 constructor arguments is not productive.
 - Instead, opt for piecewise construction.
 - Builder provides an API for constructing an object step-by-step.
+
+### 5.1.2. Summary
+
+- A builder is a separate component for building an object.
+- Can either give builder an initializer or return it via a static function.
+- To make builder fluent, return self.
+- Different facets of an object can be built with different builders working in tandem via a base class.
 
 ## 5.2. Singleton
 
