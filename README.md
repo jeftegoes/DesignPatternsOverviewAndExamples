@@ -140,10 +140,16 @@
 
 ### 5.2.2. Summary
 
-- Making a 'safe' singleton is easy: construct a static `Lazy<T>` and return its `Value`.
-- Singletons are difficult to test.
-- Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
-- Consider defining singleton lifetime in DI container.
+- Python:
+  - Different realizations of Singleton: Custom allocator, decorator, metaclass
+  - Laziness is easy, just init on first request.
+  - Monostate variation.
+  - Testability issues.
+- Dotnet:
+  - Making a 'safe' singleton is easy: construct a static `Lazy<T>` and return its `Value`.
+  - Singletons are difficult to test.
+  - Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
+  - Consider defining singleton lifetime in DI container.
 
 # 6. Structural
 
