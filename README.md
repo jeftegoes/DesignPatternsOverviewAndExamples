@@ -10,9 +10,12 @@
   - [5.1. Builder](#51-builder)
     - [5.1.1. Motivation](#511-motivation)
     - [5.1.2. Summary](#512-summary)
-  - [5.2. Singleton](#52-singleton)
+  - [5.2. Factories](#52-factories)
     - [5.2.1. Motivation](#521-motivation)
     - [5.2.2. Summary](#522-summary)
+  - [5.3. Singleton](#53-singleton)
+    - [5.3.1. Motivation](#531-motivation)
+    - [5.3.2. Summary](#532-summary)
 - [6. Structural](#6-structural)
   - [6.1. Adapter](#61-adapter)
     - [6.1.1. Motivation](#611-motivation)
@@ -124,9 +127,36 @@
 - To make builder fluent, return self.
 - Different facets of an object can be built with different builders working in tandem via a base class.
 
-## 5.2. Singleton
+## 5.2. Factories
+
+- Factory Method and Abstract Factory.
 
 ### 5.2.1. Motivation
+
+- Object creation logic becomes too convoluted.
+- Initializer (Constructor) is not descriptive.
+  - Python
+    - Name is always `__init__`
+  - Dotnet
+    - Name mandated by name of containing type.
+  - Cannot overload with same sets of arguments with different names.
+  - Can turn into "optional parameter hell".
+- Wholesale object creation (non-piecewise, unlike Builder) can be outsourced to:
+  - A separate method (Factory Method).
+  - That may exists in separate class (Factory).
+  - Can create hierarchy of factories with Abstract Factory.
+- A component responsible solely for the wholesale (not piecewise) creation of objects.
+
+### 5.2.2. Summary
+
+- A factory method is a static method that creates objects.
+- A factory can take care of object creation.
+- A factory can be external or reside inside the object as an inner class.
+- Hierarchies of factories can be used to create related objects.
+
+## 5.3. Singleton
+
+### 5.3.1. Motivation
 
 - For some components it only makes sense to have one in the system:
   - Database repository.
@@ -138,7 +168,7 @@
 - Need to take care of lazy instantiation and thread safety.
 - A component which is instantiated only once.
 
-### 5.2.2. Summary
+### 5.3.2. Summary
 
 - Python:
   - Different realizations of Singleton: Custom allocator, decorator, metaclass

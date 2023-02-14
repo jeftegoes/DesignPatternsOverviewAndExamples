@@ -6,7 +6,7 @@ class HtmlElement:
         self.text: str = text
         self.elements: list = []
 
-    def __str(self, indent: int):
+    def __str(self, indent: int) -> str:
         lines: list = []
         i = ' ' * (indent * self.indent_size)
         lines.append(f'{i}<{self.name}>')
@@ -21,7 +21,7 @@ class HtmlElement:
         lines.append(f'{i}</{self.name}>')
         return '\n'.join(lines)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.__str(0)
 
     # @staticmethod
