@@ -2,7 +2,7 @@
 # builder = HtmlBuilder('ul')
 from html_builder import HtmlBuilder
 
-builder = HtmlBuilder('ul')
+builder = HtmlBuilder.builder('ul')
 builder.add_child('li', 'hello')
 builder.add_child('li', 'world')
 print('Ordinary builder:')

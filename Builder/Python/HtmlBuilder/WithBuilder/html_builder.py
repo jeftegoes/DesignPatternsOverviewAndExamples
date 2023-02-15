@@ -22,3 +22,7 @@ class HtmlBuilder:
 
     def __str__(self) -> str:
         return str(self.__root)
+
+    @staticmethod
+    def builder(root_name: str):
+        return HtmlBuilder(root_name)
