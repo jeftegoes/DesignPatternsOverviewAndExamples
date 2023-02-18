@@ -13,9 +13,12 @@
   - [5.2. Factories](#52-factories)
     - [5.2.1. Motivation](#521-motivation)
     - [5.2.2. Summary](#522-summary)
-  - [5.3. Singleton](#53-singleton)
+  - [5.3. Prototype](#53-prototype)
     - [5.3.1. Motivation](#531-motivation)
     - [5.3.2. Summary](#532-summary)
+  - [5.4. Singleton](#54-singleton)
+    - [5.4.1. Motivation](#541-motivation)
+    - [5.4.2. Summary](#542-summary)
 - [6. Structural](#6-structural)
   - [6.1. Adapter](#61-adapter)
     - [6.1.1. Motivation](#611-motivation)
@@ -56,18 +59,18 @@
 # 2. The Patterns
 
 - Creational
-  - **Builder**
+  - Builder
   - Factories
     - Abstract factory
     - Factory Method
   - Prototype
-  - **Singleton**
+  - Singleton
 - Structural
-  - **Adapter**
+  - Adapter
   - Bridge
   - Composite
-  - **Decorator**
-  - **Façade**
+  - Decorator
+  - Façade
   - Flyweight <<< BACK HERE WITH .NET BENCHMARK>>>
   - Proxy
 - Behavioral
@@ -75,14 +78,14 @@
   - Command
   - Interpreter
   - Iterator
-  - **Mediator**
+  - Mediator
   - Memento
   - Null Object
   - Observer
   - State
-  - **Strategy**
-  - **Template Method**
-  - **Visitor**
+  - Strategy
+  - Template Method
+  - Visitor
 
 # 3. Others patterns
 
@@ -154,9 +157,30 @@
 - A factory can be external or reside inside the object as an inner class.
 - Hierarchies of factories can be used to create related objects.
 
-## 5.3. Singleton
+## 5.3. Prototype
+
+- When it's easier to copy an existing object to fully initialize a new one.
 
 ### 5.3.1. Motivation
+
+- Complicated objects (e.g., cars) aren't designed from scratch.
+  - They reiterate existing designs.
+- An existing (partially or fully constructed) design is a Prototype.
+- We make a copy (clone) the prototype and customize it.
+  - Requires "deep copy" support.
+- We make the cloning convenient (e.g., via a Factory).
+- A partially or fully initialized object that you copy (clone) and make use of.
+
+### 5.3.2. Summary
+
+- To implement a prototype, partially construct an object and store it somewhere.
+- Deep copy the prototype.
+- Customize the resulting instance.
+- A Factory provides a convenient API for using prototypes.
+
+## 5.4. Singleton
+
+### 5.4.1. Motivation
 
 - For some components it only makes sense to have one in the system:
   - Database repository.
@@ -168,7 +192,7 @@
 - Need to take care of lazy instantiation and thread safety.
 - A component which is instantiated only once.
 
-### 5.3.2. Summary
+### 5.4.2. Summary
 
 - Python:
   - Different realizations of Singleton: Custom allocator, decorator, metaclass
