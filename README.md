@@ -24,6 +24,8 @@
     - [6.1.1. Motivation](#611-motivation)
     - [6.1.2. Summary](#612-summary)
   - [6.2. Bridge](#62-bridge)
+    - [6.2.1. Motivation](#621-motivation)
+    - [6.2.2. Summary](#622-summary)
   - [6.3. Composite](#63-composite)
     - [6.3.1. Motivation](#631-motivation)
     - [6.3.2. Summary](#632-summary)
@@ -140,7 +142,7 @@
 - Initializer (Constructor) is not descriptive.
   - Python
     - Name is always `__init__`
-  - Dotnet
+  - C#
     - Name mandated by name of containing type.
   - Cannot overload with same sets of arguments with different names.
   - Can turn into "optional parameter hell".
@@ -174,9 +176,14 @@
 ### 5.3.2. Summary
 
 - To implement a prototype, partially construct an object and store it somewhere.
-- Deep copy the prototype.
+- C#
+  - Clone the prototype:
+    - Implement your own deep copy functionality; or
+    - Serialize and deserialize.
+- Python
+  - Deep copy the prototype.
+  - A Factory provides a convenient API for using prototypes.
 - Customize the resulting instance.
-- A Factory provides a convenient API for using prototypes.
 
 ## 5.4. Singleton
 
@@ -199,7 +206,7 @@
   - Laziness is easy, just init on first request.
   - Monostate variation.
   - Testability issues.
-- Dotnet:
+- C#:
   - Making a 'safe' singleton is easy: construct a static `Lazy<T>` and return its `Value`.
   - Singletons are difficult to test.
   - Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
@@ -231,9 +238,20 @@
 ## 6.2. Bridge
 
 - Connecting components together through abstractions.
+
+### 6.2.1. Motivation
+
 - Bridge prevents a "Cartesian product" complexity explosion.
+- Examples:
+  - Base class `ThreadScheduler`.
+  - Can be preemptive or cooperative.
+  - Can run on Windows or Unix.
+    - End up with a 2x2 scenario: WindowsPTS, UnixPTS, WindowsCTS, UnixCTS.
 - Bridge pattern avoids the entity explosion.
 - A mechanism that decouples an interface (hierarchy) from an implementation (hierarchy).
+
+### 6.2.2. Summary
+
 - Decouple abstraction from implementation.
 - Both can exist as hierarchies.
 - A stronger form of encapsulation.
@@ -257,8 +275,12 @@
 - Objects can use other objects via inheritance/composition.
 - Some composed and singular objects need similar/identical behaviors.
 - Composite design pattern lets us treat both types of object uniformly.
-- C# has special support for the enumeration concept.
-- A single object can masquerade as collection with `yield return this`.
+- C#
+  - has special support for the enumeration concept.
+  - A single object can masquerade as collection with `yield return this`.
+- Python
+  - Python supports interaction with `__iter__` the `ItetableABC`.
+  - A single object can make itself iterable by yelding `self` from `__iter__`.
 
 ## 6.4. Façade
 
@@ -296,7 +318,7 @@
   - No sense in storing same first/last name over and over again.
   - Store a list of names and pointers to them.
 - .NET performs string interning, so an identical string is stored only once.
-- E.g., bold or italic text in the console:
+- E.g., bold or italic text formatting in the console:
   - Don't want each character to have a formatting character.
   - Operate on ranges (e.g., line number, start:end positions).
 - A space optimization technique that lets us use less memory by storing externally the data associated with similar objects.
@@ -305,7 +327,10 @@
 
 - Store common data externally.
 - Define the idea of "ranges" on homogeneous collections and store data related to those ranges.
-- .NET string interning is the Flyweight pattern.
+- C#
+  - .NET string interning is the Flyweight pattern.
+- Python
+  - Specify an index or a reference into the external data store.
 
 # 7. Behavioral
 
@@ -315,12 +340,16 @@
 
 ### 7.1.1. Motivation
 
-- Ordinary C# statements are perishable.
+- Ordinary statements are perishable.
   - Cannot undo a field/property assignment.
   - Cannot directly serialize a sequence of action (calls).
 - Want an object that represents an operation.
-  - X should change its property Y to Z.
-  - X should do W().
+  - Scenario 1:
+    - X should change its property Y to Z.
+    - X should do W().
+  - Scenario 2:
+    - `person` should change its `age` to value 22.
+    - `car` should to `explode()`.
 - Uses: GUI commands, multi-level undo/redo, macro recording and more!
 - An object which represents an instruction to perform a particular action.
   - Contains all the information necessary for the action to be taken.
