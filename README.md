@@ -29,12 +29,15 @@
   - [6.3. Composite](#63-composite)
     - [6.3.1. Motivation](#631-motivation)
     - [6.3.2. Summary](#632-summary)
-  - [6.4. Façade](#64-façade)
+  - [6.4. Decorator](#64-decorator)
     - [6.4.1. Motivation](#641-motivation)
     - [6.4.2. Summary](#642-summary)
-  - [6.5. Flyweight](#65-flyweight)
+  - [6.5. Façade](#65-façade)
     - [6.5.1. Motivation](#651-motivation)
     - [6.5.2. Summary](#652-summary)
+  - [6.6. Flyweight](#66-flyweight)
+    - [6.6.1. Motivation](#661-motivation)
+    - [6.6.2. Summary](#662-summary)
 - [7. Behavioral](#7-behavioral)
   - [7.1. Command](#71-command)
     - [7.1.1. Motivation](#711-motivation)
@@ -201,12 +204,12 @@
 
 ### 5.4.2. Summary
 
-- Python:
+- Python
   - Different realizations of Singleton: Custom allocator, decorator, metaclass
   - Laziness is easy, just init on first request.
   - Monostate variation.
   - Testability issues.
-- C#:
+- C#
   - Making a 'safe' singleton is easy: construct a static `Lazy<T>` and return its `Value`.
   - Singletons are difficult to test.
   - Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
@@ -267,7 +270,10 @@
   - E.g., a mathematical expression composed of simple expressions; or
   - A grouping of shapes that consists of several shapes.
 - Composite design pattern is used to treat both single (scalar) and composite objects uniformly.
-  - I.e., `Foo` and `Collection<Foo>` have common APIs.
+  - C#
+    - I.e., `Foo` and `Collection<Foo>` have common APIs.
+  - Python
+    - I.e., `Foo` and `Sequence` (yielding Foo's) have common APIs.
 - A mechanism for treating individual (scalar) objects and compositions of objects in a uniform manner.
 
 ### 6.3.2. Summary
@@ -282,13 +288,41 @@
   - Python supports interaction with `__iter__` the `ItetableABC`.
   - A single object can make itself iterable by yelding `self` from `__iter__`.
 
-## 6.4. Façade
+## 6.4. Decorator
+
+- Adding behavior without altering the class itself.
+
+### 6.4.1. Motivation
+
+- Want to augment an object with additional functionality.
+- Do not want to rewrite or alter existing code (OCP).
+- Want to keep new functionality separate (SRP).
+- Need to be able to interact with existing structures.
+- Two options:
+  - Inherit from required object (if possible); some objects are sealed (C#)
+  - Build a decorator, which simply references the decorated object(s).
+- Facilitates the addition of behaviors to individual objects without inheriting from them.
+
+### 6.4.2. Summary
+
+- A decorator keeps the reference to the decorated object(s).
+- Adds utility attributes an methods to augment the object's features.
+- May or may not forward calls to the underlying object.
+- Proxying of underlying calls can be done dynamically.
+- C#
+  - Exists in a static variation
+    - `X<Y<Foo>>`
+    - Very limited due to inability to inherit from type parameters.
+- Python
+  - Python's functional decorators wrap functions; no direct relation to the GoF Decorator pattern.
+
+## 6.5. Façade
 
 ![Façade diagram](Images/UmlFa%C3%A7ade.png)
 
 - Exposing several components through a single interface.
 
-### 6.4.1. Motivation
+### 6.5.1. Motivation
 
 - Balancing complexity and presentation/usability.
   - Typical home:
@@ -300,17 +334,17 @@
     - API consumers want it to "just work".
 - Provides a simple, easy to understand/user interface over a large and sophisticated body of code.
 
-### 6.4.2. Summary
+### 6.5.2. Summary
 
 - Build a Façade to provide a simplified API over a set of classes.
 - May with to (optionally) expose internal through the Façade.
 - May allow users to "Escalate" to use more complex APIs if they need to.
 
-## 6.5. Flyweight
+## 6.6. Flyweight
 
 - Space otimization!
 
-### 6.5.1. Motivation
+### 6.6.1. Motivation
 
 - Avoid redundancy when storing data.
 - E.G., MMORPG.
@@ -323,7 +357,7 @@
   - Operate on ranges (e.g., line number, start:end positions).
 - A space optimization technique that lets us use less memory by storing externally the data associated with similar objects.
 
-### 6.5.2. Summary
+### 6.6.2. Summary
 
 - Store common data externally.
 - Define the idea of "ranges" on homogeneous collections and store data related to those ranges.
