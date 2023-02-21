@@ -19,6 +19,7 @@
   - [5.4. Singleton](#54-singleton)
     - [5.4.1. Motivation](#541-motivation)
     - [5.4.2. Summary](#542-summary)
+  - [5.5. Creational Summary](#55-creational-summary)
 - [6. Structural](#6-structural)
   - [6.1. Adapter](#61-adapter)
     - [6.1.1. Motivation](#611-motivation)
@@ -38,6 +39,11 @@
   - [6.6. Flyweight](#66-flyweight)
     - [6.6.1. Motivation](#661-motivation)
     - [6.6.2. Summary](#662-summary)
+  - [6.7. Proxy](#67-proxy)
+    - [6.7.1. Motivation](#671-motivation)
+    - [6.7.2. Summary](#672-summary)
+    - [6.7.3. Proxy vs Decorator](#673-proxy-vs-decorator)
+  - [6.8. Structural Summary](#68-structural-summary)
 - [7. Behavioral](#7-behavioral)
   - [7.1. Command](#71-command)
     - [7.1.1. Motivation](#711-motivation)
@@ -48,6 +54,7 @@
   - [7.3. Template Method](#73-template-method)
     - [7.3.1. Motivation](#731-motivation)
     - [7.3.2. Summary](#732-summary)
+  - [7.4. Behavioral Summary](#74-behavioral-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 
 # 1. Overview
@@ -215,6 +222,8 @@
   - Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
   - Consider defining singleton lifetime in DI container.
 
+## 5.5. Creational Summary
+
 # 6. Structural
 
 ## 6.1. Adapter
@@ -366,6 +375,38 @@
 - Python
   - Specify an index or a reference into the external data store.
 
+## 6.7. Proxy
+
+- An interface for accessing a particular resource.
+
+### 6.7.1. Motivation
+
+- You are calling `foo.Bar()`.
+- This assumes that `foo` is the same process as `Bar()`.
+- What if, later on, you want to put all `Foo-related` operations into a separate process.
+  - Can you avoid changing your code?
+- Proxy to the rescue!
+  - Same interface, entirely different behavior.
+- This is called a **communication proxy**.
+  - Other types: logging, virtual, guarding, ...
+- A class that functions as an interface to a particular resource.
+- That resource may be remote, expensive to construct, or may require logging or some other added functionality.
+
+### 6.7.2. Summary
+
+- A proxy has the same interface as the underlying object.
+- To create a proxy, simply replicate the existing interface of an object.
+- Add relevant functionality to the redefined member functions.
+- Different proxies (communication, logging, caching, etc.) have completely different behaviors.
+
+### 6.7.3. Proxy vs Decorator
+
+- Proxy provides an identical interface; decorator provides an enhanced interface.
+- Decorator typically aggregates (or has reference to) what it is decorating; proxy doesn't have to.
+- Proxy might not even be working with a materialized object.
+
+## 6.8. Structural Summary
+
 # 7. Behavioral
 
 ## 7.1. Command
@@ -440,6 +481,8 @@
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
+
+## 7.4. Behavioral Summary
 
 # 8. Duck Typing Mixins
 
