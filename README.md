@@ -45,16 +45,22 @@
     - [6.7.3. Proxy vs Decorator](#673-proxy-vs-decorator)
   - [6.8. Structural Summary](#68-structural-summary)
 - [7. Behavioral](#7-behavioral)
-  - [7.1. Command](#71-command)
+  - [7.1. Chain of Responsibility](#71-chain-of-responsibility)
     - [7.1.1. Motivation](#711-motivation)
     - [7.1.2. Summary](#712-summary)
-  - [7.2. Null Object](#72-null-object)
+  - [7.2. Command](#72-command)
     - [7.2.1. Motivation](#721-motivation)
     - [7.2.2. Summary](#722-summary)
-  - [7.3. Template Method](#73-template-method)
+  - [7.3. Null Object](#73-null-object)
     - [7.3.1. Motivation](#731-motivation)
     - [7.3.2. Summary](#732-summary)
-  - [7.4. Behavioral Summary](#74-behavioral-summary)
+  - [7.4. Strategy](#74-strategy)
+    - [7.4.1. Motivation](#741-motivation)
+    - [7.4.2. Summary](#742-summary)
+  - [7.5. Template Method](#75-template-method)
+    - [7.5.1. Motivation](#751-motivation)
+    - [7.5.2. Summary](#752-summary)
+  - [7.6. Behavioral Summary](#76-behavioral-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 
 # 1. Overview
@@ -86,7 +92,7 @@
   - Flyweight <<< BACK HERE WITH .NET BENCHMARK>>>
   - Proxy
 - Behavioral
-  - Chain of responsability
+  - Chain of responsibility
   - Command
   - Interpreter
   - Iterator
@@ -104,6 +110,7 @@
 - Monostate
 - Ambient Context
 - Specification
+- Unit of work
 
 # 4. Gamma categorization
 
@@ -223,6 +230,24 @@
   - Consider defining singleton lifetime in DI container.
 
 ## 5.5. Creational Summary
+
+- **Builder:**
+  - Separate component for when object construction gets too complicated.
+  - Can create mutually cooperation sub-builders.
+  - Often has a fluent interface.
+- **Factories:**
+  - Factory method more expressive than initializer.
+  - Factory can be an outside class or inner class; inner class has the benefit of accessing private members.
+- **Prototype:**
+  - Creation of object from an existing object.
+  - Requires explicit deep copy or copy through serialization.
+- **Singleton:**
+  - When you need to ensure just a single instance exists.
+  - C#
+    - Made thread-safe and lazy with Lazy<T>.
+  - Python
+    - Easy to make with a decorator or metaclass.
+  - Consider using dependency injection.
 
 # 6. Structural
 
@@ -407,13 +432,61 @@
 
 ## 6.8. Structural Summary
 
+- **Adapter:**
+  - Converts the interface you get to the interface you need.
+- **Bridge:**
+  - Decouple abstraction from implementation.
+- **Composite:**
+  - Allows clients to treat individual objects and compositions of objects uniformly.
+- **Decorator:**
+  - Attach additional responsibilities to object.
+  - Python
+    - Has functional decorators.
+- **Façade:**
+  - Provide a single unified interface over a set of classes/systems/interfaces.
+  - Friendly and easy-to-use, but can provide access to low-level features.
+- **Flyweight:**
+  - Efficiently support very large numbers of similar objects.
+- **Proxy:**
+  - Provide a surrogate object that forwards calls to the real object while performing additional functions.
+  - E.g., access control, communication, logging, etc.
+  - Dynamic proxy creates a proxy dynamically, without the necessity of replicating the target object API.
+
 # 7. Behavioral
 
-## 7.1. Command
+## 7.1. Chain of Responsibility
+
+- Sequence of handlers processing an event one after another.
+
+### 7.1.1. Motivation
+
+- Unethical behavior by an employee; who takes the blame?
+  - Employee.
+  - Manager.
+  - CEO.
+- You click a graphical element on a form
+  - Button handles it, stops further processing.
+  - Underlying group box.
+  - Underlying windows.
+- CCG computer game
+  - Creature has attack and defense values.
+  - Those can be boosted by other cards.
+- A chain of components who all get a chance to process a command or a query, optionally having default processing implementation and an ability to terminate the processing chain.
+
+### 7.1.2. Summary
+
+- Chain of Responsibility can be implemented as a chain of references or a centralized construct.
+- Enlist objects in the chain, possibly controlling their order.
+- C#
+  - Object removal from chain (e.g., in `Disponse()`)
+- Python
+  - Object removal from chain (e.g., in `__exit__`)
+
+## 7.2. Command
 
 - You shall not pass!
 
-### 7.1.1. Motivation
+### 7.2.1. Motivation
 
 - Ordinary statements are perishable.
   - Cannot undo a field/property assignment.
@@ -429,18 +502,18 @@
 - An object which represents an instruction to perform a particular action.
   - Contains all the information necessary for the action to be taken.
 
-### 7.1.2. Summary
+### 7.2.2. Summary
 
 - Encapsulate all details of an operation in separate object.
 - Define instruction for applying the command (either in the command itself, or elsewhere).
 - Optionally define instruction for undoing the command.
 - Can create composite commands (a.k.a macros).
 
-## 7.2. Null Object
+## 7.3. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-### 7.2.1. Motivation
+### 7.3.1. Motivation
 
 - When component `A` uses component `B`, it typically assumes that `B` is non-null.
   - You inject `B`, not `B?` or some `Option<B>`.
@@ -450,7 +523,7 @@
   - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
 - A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
 
-### 7.2.2. Summary
+### 7.3.2. Summary
 
 - Implement the required interface.
 - Rewrite the methods with empty bodies:
@@ -460,11 +533,20 @@
 - Dynamic construction possible.
   - With associated performance implications.
 
-## 7.3. Template Method
+## 7.4. Strategy
+
+- System behavior partially specified at runtime.
+
+### 7.4.1. Motivation
+
+
+### 7.4.2. Summary
+
+## 7.5. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 7.3.1. Motivation
+### 7.5.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -476,13 +558,13 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.3.2. Summary
+### 7.5.2. Summary
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
 
-## 7.4. Behavioral Summary
+## 7.6. Behavioral Summary
 
 # 8. Duck Typing Mixins
 
