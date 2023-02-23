@@ -51,16 +51,22 @@
   - [7.2. Command](#72-command)
     - [7.2.1. Motivation](#721-motivation)
     - [7.2.2. Summary](#722-summary)
-  - [7.3. Null Object](#73-null-object)
+  - [7.3. Memento](#73-memento)
     - [7.3.1. Motivation](#731-motivation)
     - [7.3.2. Summary](#732-summary)
-  - [7.4. Strategy](#74-strategy)
+  - [7.4. Null Object](#74-null-object)
     - [7.4.1. Motivation](#741-motivation)
     - [7.4.2. Summary](#742-summary)
-  - [7.5. Template Method](#75-template-method)
+  - [7.5. Strategy](#75-strategy)
     - [7.5.1. Motivation](#751-motivation)
     - [7.5.2. Summary](#752-summary)
-  - [7.6. Behavioral Summary](#76-behavioral-summary)
+  - [7.6. Template Method](#76-template-method)
+    - [7.6.1. Motivation](#761-motivation)
+    - [7.6.2. Summary](#762-summary)
+  - [7.7. Visitor](#77-visitor)
+    - [7.7.1. Motivation](#771-motivation)
+    - [7.7.2. Summary](#772-summary)
+  - [7.8. Behavioral Summary](#78-behavioral-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 
 # 1. Overview
@@ -224,7 +230,7 @@
   - Monostate variation.
   - Testability issues.
 - C#
-  - Making a 'safe' singleton is easy: construct a static `Lazy<T>` and return its `Value`.
+  - Making a "safe" singleton is easy: construct a static `Lazy<T>` and return its `Value`.
   - Singletons are difficult to test.
   - Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
   - Consider defining singleton lifetime in DI container.
@@ -509,11 +515,33 @@
 - Optionally define instruction for undoing the command.
 - Can create composite commands (a.k.a macros).
 
-## 7.3. Null Object
+## 7.3. Memento
+
+- Keep a memento of an object's state to return to that state.
+
+### 7.3.1. Motivation
+
+- An object or system foes through changes.
+  - E.g., a bank account gets deposits and withdrawals.
+- There are different ways of navigating those changes.
+- One way is to record every change (Command) and teach a command to "undo" itself.
+- Another is to simply save snapshots of the system (Memento).
+- A token/handle representing the system state.
+  - Lets us roll back to the state when the token was generated.
+  - May or may not directly expose state information.
+
+### 7.3.2. Summary
+
+- Mementos are used to roll back states arbitrarily.
+- A memento is simply a token/hnadle class with (typically) no function of its own.
+- A memento is not required to expose directly the state(s) to which it reverts the system.
+- Can be used to implement undo/redo.
+
+## 7.4. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-### 7.3.1. Motivation
+### 7.4.1. Motivation
 
 - When component `A` uses component `B`, it typically assumes that `B` is non-null.
   - You inject `B`, not `B?` or some `Option<B>`.
@@ -523,7 +551,7 @@
   - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
 - A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
 
-### 7.3.2. Summary
+### 7.4.2. Summary
 
 - Implement the required interface.
 - Rewrite the methods with empty bodies:
@@ -533,20 +561,32 @@
 - Dynamic construction possible.
   - With associated performance implications.
 
-## 7.4. Strategy
+## 7.5. Strategy
 
 - System behavior partially specified at runtime.
 
-### 7.4.1. Motivation
+### 7.5.1. Motivation
 
+- Many algorithms can be decomposed into higher and lower level parts.
+- Making tea can be decomposed into:
+  - The process of making a hot beverage (boil water, pour into cup); and
+  - Tea-specific things (put teabag into water)
+- The high-level algorithm can then be reused for making coffee or hot chocolate.
+  - Supported by beverage-specific strategies.
+- Enables the exact behavior of a system to be selected at run-time.
+- Also know as a _policy_ (esp. in the C++ world).
 
-### 7.4.2. Summary
+### 7.5.2. Summary
 
-## 7.5. Template Method
+- Define an algorithm at a high level.
+- Define the interface you expect each strategy to follow.
+- Provide for dynamic composition of strategies in the resulting object.
+
+## 7.6. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 7.5.1. Motivation
+### 7.6.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -558,15 +598,44 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.5.2. Summary
+### 7.6.2. Summary
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
 
-## 7.6. Behavioral Summary
+## 7.7. Visitor
+
+- Allows adding extra behaviors to entire hierarchies of classes.
+- Typically a tool for structure traversal rather than anything else.
+
+### 7.7.1. Motivation
+
+- Need to define a new operation on an entire class hierarchy.
+  - E.g., make a document model printable to HTML/Markdown
+- Do not want to keep modifying every class in the hierarchy.
+- Need access to the non-common aspects of classes in the hierarchy.
+  - I.e., an extension method won't do.
+- Create an external component to handle rendering.
+  - But avoid explicitly type checks.
+- A pattern where a component (visitor) is allowed to traverse the entire inheritance hierarchy.
+- Implemented by propagating a single `visit()` method throughout the entire hierarchy.
+
+### 7.7.2. Summary
+
+- C#
+  - Propagate an accept `(Visitor visitor)` method throughout the entire hierarchy.
+  - Create a visitor with Visit(Foo), Visit(Bar), ... for each element in the hierarchy.
+  - Each `accept()` simply calls `visitor.Visit(this)`.
+  - Using `dynamic`, we can invoke right overload based on argument type alone (dynamic dispatch).
+- Python
+  - OOP double-dispatch approach is not necessary in Python.
+  - Make a visitor, decorating each "overload" with `@visitor`.
+  - Call `visit()` and the entire structure gets traversed.
+
+## 7.8. Behavioral Summary
 
 # 8. Duck Typing Mixins
 
 - The `IScalar<T>` mixing is a real-world mixing.
-- It's used in situations where you want a 'true' implementation of a Composite pattern, i.e., when you want composite objects and scalar object to be both enumerable.
+- It's used in situations where you want a "true" implementation of a Composite pattern, i.e., when you want composite objects and scalar object to be both enumerable.
