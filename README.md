@@ -51,22 +51,25 @@
   - [7.2. Command](#72-command)
     - [7.2.1. Motivation](#721-motivation)
     - [7.2.2. Summary](#722-summary)
-  - [7.3. Memento](#73-memento)
+  - [7.3. Interpreter](#73-interpreter)
     - [7.3.1. Motivation](#731-motivation)
     - [7.3.2. Summary](#732-summary)
-  - [7.4. Null Object](#74-null-object)
+  - [7.4. Memento](#74-memento)
     - [7.4.1. Motivation](#741-motivation)
     - [7.4.2. Summary](#742-summary)
-  - [7.5. Strategy](#75-strategy)
+  - [7.5. Null Object](#75-null-object)
     - [7.5.1. Motivation](#751-motivation)
     - [7.5.2. Summary](#752-summary)
-  - [7.6. Template Method](#76-template-method)
+  - [7.6. Strategy](#76-strategy)
     - [7.6.1. Motivation](#761-motivation)
     - [7.6.2. Summary](#762-summary)
-  - [7.7. Visitor](#77-visitor)
+  - [7.7. Template Method](#77-template-method)
     - [7.7.1. Motivation](#771-motivation)
     - [7.7.2. Summary](#772-summary)
-  - [7.8. Behavioral Summary](#78-behavioral-summary)
+  - [7.8. Visitor](#78-visitor)
+    - [7.8.1. Motivation](#781-motivation)
+    - [7.8.2. Summary](#782-summary)
+  - [7.9. Behavioral Summary](#79-behavioral-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 
 # 1. Overview
@@ -515,11 +518,35 @@
 - Optionally define instruction for undoing the command.
 - Can create composite commands (a.k.a macros).
 
-## 7.3. Memento
+## 7.3. Interpreter
+
+- Interpreters are all around us, Even now, in this very room.
+
+### 7.3.1. Motivation
+
+- Textual input needs to be processed
+  - E.g., turned into OOP structures.
+- Some examples:
+  - Programming languages compilers, interpreters and IDEs.
+  - HTML, XML and similar.
+  - Numeric expressions (3+4/5).
+  - Regular expressions.
+- Turning strings into OOP based structures in a complicated process.
+- A component that processes structured text data.
+- Does so by turning it into separate lexical token (lexing) and then interpreting sequences of said token (parsing).
+
+### 7.3.2. Summary
+
+- Barring simples cases, an interpreter acts in two stages:
+  - Lexing turns text into a set of token.
+  - Parsing tokens into meaningful constructs.
+- Parse data can then be traversed.
+
+## 7.4. Memento
 
 - Keep a memento of an object's state to return to that state.
 
-### 7.3.1. Motivation
+### 7.4.1. Motivation
 
 - An object or system foes through changes.
   - E.g., a bank account gets deposits and withdrawals.
@@ -530,18 +557,18 @@
   - Lets us roll back to the state when the token was generated.
   - May or may not directly expose state information.
 
-### 7.3.2. Summary
+### 7.4.2. Summary
 
 - Mementos are used to roll back states arbitrarily.
 - A memento is simply a token/hnadle class with (typically) no function of its own.
 - A memento is not required to expose directly the state(s) to which it reverts the system.
 - Can be used to implement undo/redo.
 
-## 7.4. Null Object
+## 7.5. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-### 7.4.1. Motivation
+### 7.5.1. Motivation
 
 - When component `A` uses component `B`, it typically assumes that `B` is non-null.
   - You inject `B`, not `B?` or some `Option<B>`.
@@ -551,7 +578,7 @@
   - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
 - A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
 
-### 7.4.2. Summary
+### 7.5.2. Summary
 
 - Implement the required interface.
 - Rewrite the methods with empty bodies:
@@ -561,11 +588,11 @@
 - Dynamic construction possible.
   - With associated performance implications.
 
-## 7.5. Strategy
+## 7.6. Strategy
 
 - System behavior partially specified at runtime.
 
-### 7.5.1. Motivation
+### 7.6.1. Motivation
 
 - Many algorithms can be decomposed into higher and lower level parts.
 - Making tea can be decomposed into:
@@ -576,17 +603,17 @@
 - Enables the exact behavior of a system to be selected at run-time.
 - Also know as a _policy_ (esp. in the C++ world).
 
-### 7.5.2. Summary
+### 7.6.2. Summary
 
 - Define an algorithm at a high level.
 - Define the interface you expect each strategy to follow.
 - Provide for dynamic composition of strategies in the resulting object.
 
-## 7.6. Template Method
+## 7.7. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 7.6.1. Motivation
+### 7.7.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -598,18 +625,18 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.6.2. Summary
+### 7.7.2. Summary
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
 
-## 7.7. Visitor
+## 7.8. Visitor
 
 - Allows adding extra behaviors to entire hierarchies of classes.
 - Typically a tool for structure traversal rather than anything else.
 
-### 7.7.1. Motivation
+### 7.8.1. Motivation
 
 - Need to define a new operation on an entire class hierarchy.
   - E.g., make a document model printable to HTML/Markdown
@@ -621,7 +648,7 @@
 - A pattern where a component (visitor) is allowed to traverse the entire inheritance hierarchy.
 - Implemented by propagating a single `visit()` method throughout the entire hierarchy.
 
-### 7.7.2. Summary
+### 7.8.2. Summary
 
 - C#
   - Propagate an accept `(Visitor visitor)` method throughout the entire hierarchy.
@@ -633,7 +660,7 @@
   - Make a visitor, decorating each "overload" with `@visitor`.
   - Call `visit()` and the entire structure gets traversed.
 
-## 7.8. Behavioral Summary
+## 7.9. Behavioral Summary
 
 # 8. Duck Typing Mixins
 
