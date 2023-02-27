@@ -54,23 +54,30 @@
   - [7.3. Interpreter](#73-interpreter)
     - [7.3.1. Motivation](#731-motivation)
     - [7.3.2. Summary](#732-summary)
-  - [7.4. Memento](#74-memento)
+  - [7.4. Iterator](#74-iterator)
     - [7.4.1. Motivation](#741-motivation)
     - [7.4.2. Summary](#742-summary)
-  - [7.5. Null Object](#75-null-object)
+  - [7.5. Memento](#75-memento)
     - [7.5.1. Motivation](#751-motivation)
     - [7.5.2. Summary](#752-summary)
-  - [7.6. Strategy](#76-strategy)
+  - [7.6. Null Object](#76-null-object)
     - [7.6.1. Motivation](#761-motivation)
     - [7.6.2. Summary](#762-summary)
-  - [7.7. Template Method](#77-template-method)
+  - [7.7. State](#77-state)
     - [7.7.1. Motivation](#771-motivation)
     - [7.7.2. Summary](#772-summary)
-  - [7.8. Visitor](#78-visitor)
+  - [7.8. Strategy](#78-strategy)
     - [7.8.1. Motivation](#781-motivation)
     - [7.8.2. Summary](#782-summary)
-  - [7.9. Behavioral Summary](#79-behavioral-summary)
+  - [7.9. Template Method](#79-template-method)
+    - [7.9.1. Motivation](#791-motivation)
+    - [7.9.2. Summary](#792-summary)
+  - [7.10. Visitor](#710-visitor)
+    - [7.10.1. Motivation](#7101-motivation)
+    - [7.10.2. Summary](#7102-summary)
+  - [7.11. Behavioral Summary](#711-behavioral-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
+- [9. Personal choices of GoF patterns](#9-personal-choices-of-gof-patterns)
 
 # 1. Overview
 
@@ -542,11 +549,21 @@
   - Parsing tokens into meaningful constructs.
 - Parse data can then be traversed.
 
-## 7.4. Memento
+## 7.4. Iterator
+
+- How traversal of data structures happens and who makes it happen.
+
+### 7.4.1. Motivation
+
+- Iteration (traversal) is a core functionality of various data structures.
+
+### 7.4.2. Summary
+
+## 7.5. Memento
 
 - Keep a memento of an object's state to return to that state.
 
-### 7.4.1. Motivation
+### 7.5.1. Motivation
 
 - An object or system foes through changes.
   - E.g., a bank account gets deposits and withdrawals.
@@ -557,18 +574,18 @@
   - Lets us roll back to the state when the token was generated.
   - May or may not directly expose state information.
 
-### 7.4.2. Summary
+### 7.5.2. Summary
 
 - Mementos are used to roll back states arbitrarily.
 - A memento is simply a token/hnadle class with (typically) no function of its own.
 - A memento is not required to expose directly the state(s) to which it reverts the system.
 - Can be used to implement undo/redo.
 
-## 7.5. Null Object
+## 7.6. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-### 7.5.1. Motivation
+### 7.6.1. Motivation
 
 - When component `A` uses component `B`, it typically assumes that `B` is non-null.
   - You inject `B`, not `B?` or some `Option<B>`.
@@ -578,7 +595,7 @@
   - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
 - A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
 
-### 7.5.2. Summary
+### 7.6.2. Summary
 
 - Implement the required interface.
 - Rewrite the methods with empty bodies:
@@ -588,11 +605,36 @@
 - Dynamic construction possible.
   - With associated performance implications.
 
-## 7.6. Strategy
+## 7.7. State
+
+- Fun with Finite State Machines.
+
+### 7.7.1. Motivation
+
+- Considerer an ordinary telephone.
+- What you do with it depends on the state of the phone/line.
+  - If it's ringing or you want to make a call, you can pick it up.
+  - Phone must be off the hook to talk/make a call.
+  - If you try calling someone, and it's busy, you put the handset down.
+- Changes in state can be explicit or in response to event (Observer pattern).
+- A pattern in which the object's behavior is determined by its state.
+- An object transitions from on state to another (something needs to trigger a transition).
+- A formalized construct which manages state and transitions is called a state machine.
+
+### 7.7.2. Summary
+
+- Given sufficient complexity, it pays to formally define possible states and events/triggers.
+- Can define:
+  - State entry/exit behaviors.
+  - Action when a particular event causes a transition.
+  - Guard conditions enabling/disabling a transitions.
+  - Default action when no transitions are found for an event.
+
+## 7.8. Strategy
 
 - System behavior partially specified at runtime.
 
-### 7.6.1. Motivation
+### 7.8.1. Motivation
 
 - Many algorithms can be decomposed into higher and lower level parts.
 - Making tea can be decomposed into:
@@ -603,17 +645,17 @@
 - Enables the exact behavior of a system to be selected at run-time.
 - Also know as a _policy_ (esp. in the C++ world).
 
-### 7.6.2. Summary
+### 7.8.2. Summary
 
 - Define an algorithm at a high level.
 - Define the interface you expect each strategy to follow.
 - Provide for dynamic composition of strategies in the resulting object.
 
-## 7.7. Template Method
+## 7.9. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 7.7.1. Motivation
+### 7.9.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -625,18 +667,18 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.7.2. Summary
+### 7.9.2. Summary
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
 
-## 7.8. Visitor
+## 7.10. Visitor
 
 - Allows adding extra behaviors to entire hierarchies of classes.
 - Typically a tool for structure traversal rather than anything else.
 
-### 7.8.1. Motivation
+### 7.10.1. Motivation
 
 - Need to define a new operation on an entire class hierarchy.
   - E.g., make a document model printable to HTML/Markdown
@@ -648,7 +690,7 @@
 - A pattern where a component (visitor) is allowed to traverse the entire inheritance hierarchy.
 - Implemented by propagating a single `visit()` method throughout the entire hierarchy.
 
-### 7.8.2. Summary
+### 7.10.2. Summary
 
 - C#
   - Propagate an accept `(Visitor visitor)` method throughout the entire hierarchy.
@@ -660,9 +702,25 @@
   - Make a visitor, decorating each "overload" with `@visitor`.
   - Call `visit()` and the entire structure gets traversed.
 
-## 7.9. Behavioral Summary
+## 7.11. Behavioral Summary
 
 # 8. Duck Typing Mixins
 
 - The `IScalar<T>` mixing is a real-world mixing.
 - It's used in situations where you want a "true" implementation of a Composite pattern, i.e., when you want composite objects and scalar object to be both enumerable.
+
+# 9. Personal choices of GoF patterns
+
+- Most used:
+  - Factory Method / Abstract Factory
+  - Singleton
+  - Adapter
+  - Façade
+  - Decorator
+  - Proxy
+  - State
+  - Strategy
+  - Command
+- Very very very specific uses:
+  - Flyweight (Performance)
+  - Interpreter (Compilator/Interepretor)
