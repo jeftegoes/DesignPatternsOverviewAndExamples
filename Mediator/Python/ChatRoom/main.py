@@ -18,3 +18,4 @@ barbara.say("Hi guys.")
 
 sabrina = Person("Sabrina")
 room.join(sabrina)
+sabrina.private_message("Jefté", "Meow ;P")

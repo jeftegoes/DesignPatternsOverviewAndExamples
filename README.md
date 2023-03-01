@@ -66,19 +66,22 @@
   - [7.7. Null Object](#77-null-object)
     - [7.7.1. Motivation](#771-motivation)
     - [7.7.2. Summary](#772-summary)
-  - [7.8. State](#78-state)
+  - [7.8. Observer](#78-observer)
     - [7.8.1. Motivation](#781-motivation)
     - [7.8.2. Summary](#782-summary)
-  - [7.9. Strategy](#79-strategy)
+  - [7.9. State](#79-state)
     - [7.9.1. Motivation](#791-motivation)
     - [7.9.2. Summary](#792-summary)
-  - [7.10. Template Method](#710-template-method)
+  - [7.10. Strategy](#710-strategy)
     - [7.10.1. Motivation](#7101-motivation)
     - [7.10.2. Summary](#7102-summary)
-  - [7.11. Visitor](#711-visitor)
+  - [7.11. Template Method](#711-template-method)
     - [7.11.1. Motivation](#7111-motivation)
     - [7.11.2. Summary](#7112-summary)
-  - [7.12. Behavioral Summary](#712-behavioral-summary)
+  - [7.12. Visitor](#712-visitor)
+    - [7.12.1. Motivation](#7121-motivation)
+    - [7.12.2. Summary](#7122-summary)
+  - [7.13. Behavioral Summary](#713-behavioral-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 - [9. Personal choices of GoF patterns](#9-personal-choices-of-gof-patterns)
 
@@ -652,11 +655,21 @@
 - Dynamic construction possible.
   - With associated performance implications.
 
-## 7.8. State
+## 7.8. Observer
+
+- I am watching you!
+
+### 7.8.1. Motivation
+
+- 
+
+### 7.8.2. Summary
+
+## 7.9. State
 
 - Fun with Finite State Machines.
 
-### 7.8.1. Motivation
+### 7.9.1. Motivation
 
 - Considerer an ordinary telephone.
 - What you do with it depends on the state of the phone/line.
@@ -668,7 +681,7 @@
 - An object transitions from on state to another (something needs to trigger a transition).
 - A formalized construct which manages state and transitions is called a state machine.
 
-### 7.8.2. Summary
+### 7.9.2. Summary
 
 - Given sufficient complexity, it pays to formally define possible states and events/triggers.
 - Can define:
@@ -677,11 +690,11 @@
   - Guard conditions enabling/disabling a transitions.
   - Default action when no transitions are found for an event.
 
-## 7.9. Strategy
+## 7.10. Strategy
 
 - System behavior partially specified at runtime.
 
-### 7.9.1. Motivation
+### 7.10.1. Motivation
 
 - Many algorithms can be decomposed into higher and lower level parts.
 - Making tea can be decomposed into:
@@ -692,17 +705,17 @@
 - Enables the exact behavior of a system to be selected at run-time.
 - Also know as a _policy_ (esp. in the C++ world).
 
-### 7.9.2. Summary
+### 7.10.2. Summary
 
 - Define an algorithm at a high level.
 - Define the interface you expect each strategy to follow.
 - Provide for dynamic composition of strategies in the resulting object.
 
-## 7.10. Template Method
+## 7.11. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 7.10.1. Motivation
+### 7.11.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -714,18 +727,18 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.10.2. Summary
+### 7.11.2. Summary
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
 
-## 7.11. Visitor
+## 7.12. Visitor
 
 - Allows adding extra behaviors to entire hierarchies of classes.
 - Typically a tool for structure traversal rather than anything else.
 
-### 7.11.1. Motivation
+### 7.12.1. Motivation
 
 - Need to define a new operation on an entire class hierarchy.
   - E.g., make a document model printable to HTML/Markdown
@@ -737,7 +750,7 @@
 - A pattern where a component (visitor) is allowed to traverse the entire inheritance hierarchy.
 - Implemented by propagating a single `visit()` method throughout the entire hierarchy.
 
-### 7.11.2. Summary
+### 7.12.2. Summary
 
 - C#
   - Propagate an accept `(Visitor visitor)` method throughout the entire hierarchy.
@@ -749,7 +762,7 @@
   - Make a visitor, decorating each "overload" with `@visitor`.
   - Call `visit()` and the entire structure gets traversed.
 
-## 7.12. Behavioral Summary
+## 7.13. Behavioral Summary
 
 # 8. Duck Typing Mixins
 

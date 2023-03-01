@@ -16,7 +16,7 @@ class ChatRoom:
             if people.name != source:
                 people.receive(source, message)
 
-    def message(self, source, destination, message: str) -> None:
+    def message(self, source: str, destination: str, message: str) -> None:
         for people in self.peoples:
             if people.name == destination:
                 people.receive(source, message)
