@@ -57,25 +57,28 @@
   - [7.4. Iterator](#74-iterator)
     - [7.4.1. Motivation](#741-motivation)
     - [7.4.2. Summary](#742-summary)
-  - [7.5. Memento](#75-memento)
+  - [7.5. Mediator](#75-mediator)
     - [7.5.1. Motivation](#751-motivation)
     - [7.5.2. Summary](#752-summary)
-  - [7.6. Null Object](#76-null-object)
+  - [7.6. Memento](#76-memento)
     - [7.6.1. Motivation](#761-motivation)
     - [7.6.2. Summary](#762-summary)
-  - [7.7. State](#77-state)
+  - [7.7. Null Object](#77-null-object)
     - [7.7.1. Motivation](#771-motivation)
     - [7.7.2. Summary](#772-summary)
-  - [7.8. Strategy](#78-strategy)
+  - [7.8. State](#78-state)
     - [7.8.1. Motivation](#781-motivation)
     - [7.8.2. Summary](#782-summary)
-  - [7.9. Template Method](#79-template-method)
+  - [7.9. Strategy](#79-strategy)
     - [7.9.1. Motivation](#791-motivation)
     - [7.9.2. Summary](#792-summary)
-  - [7.10. Visitor](#710-visitor)
+  - [7.10. Template Method](#710-template-method)
     - [7.10.1. Motivation](#7101-motivation)
     - [7.10.2. Summary](#7102-summary)
-  - [7.11. Behavioral Summary](#711-behavioral-summary)
+  - [7.11. Visitor](#711-visitor)
+    - [7.11.1. Motivation](#7111-motivation)
+    - [7.11.2. Summary](#7112-summary)
+  - [7.12. Behavioral Summary](#712-behavioral-summary)
 - [8. Duck Typing Mixins](#8-duck-typing-mixins)
 - [9. Personal choices of GoF patterns](#9-personal-choices-of-gof-patterns)
 
@@ -139,7 +142,7 @@
 - Structural patters:
   - Concerned with the structure (e.g., class members).
   - Many patterns are wrappers that mimic the underlying class interface.
-  - Stress the importante of good API design.
+  - Stress the important of good API design.
 - Behavioral patterns:
   - They are all different, no central theme.
 
@@ -242,7 +245,7 @@
 - C#
   - Making a "safe" singleton is easy: construct a static `Lazy<T>` and return its `Value`.
   - Singletons are difficult to test.
-  - Instead of directly using a singleton, consider depending on an abstraction (e,g,m an interface).
+  - Instead of directly using a singleton, consider depending on an abstraction (e.g., an interface).
   - Consider defining singleton lifetime in DI container.
 
 ## 5.5. Creational Summary
@@ -278,7 +281,7 @@
   - Voltage (5V, 220V).
   - Socket/plug type (Europe, UK, USA).
 - We cannot modify out gadgets to support every possible interface:
-  - Some support possible (e.g, 120/220V).
+  - Some support possible (e.g., 120/220V).
 - Thus, we use a special device (an adapter) to give us the interface we require from the interface we have.
 
 ### 6.1.2. Summary
@@ -392,7 +395,7 @@
 
 ## 6.6. Flyweight
 
-- Space otimization!
+- Space optimization!
 
 ### 6.6.1. Motivation
 
@@ -556,14 +559,58 @@
 ### 7.4.1. Motivation
 
 - Iteration (traversal) is a core functionality of various data structures.
+- An `interator` is a class that facilitates the traversal.
+  - Keeps a reference to the current element.
+  - Know how to move to a different element.
+- In Python, the iterator protocol requires:
+  - `__iter__()` to expose the iterator, which uses.
+  - `__next__()` to return each of the iterated elements or `raise StopIteration` when it's done.
+- In .NET iterator is an implicit construct
+  - .NET builds a state machine around you `yield` return statements.
+- An object (or, in .NET, a method) that facilitates the traversal of a data structure.
 
 ### 7.4.2. Summary
 
-## 7.5. Memento
+- An iterator specified how you can traverse an object.
+- C#
+  - An iterator object, unlike a method, cannot be recursive.
+  - Generally, an `IEnumerable<T>` returning method is enough.
+  - Iterator works through `duck typing` - You need a `GetEnumerator()` that `yields` a type that has Current and `MoveNext()`.
+- Python
+  - Stateful iterators cannot be recursive.
+  - `yield` allows for much more succinct iteration.
+
+## 7.5. Mediator
+
+- Facilitates communication between components.
+
+### 7.5.1. Motivation
+
+- Components may go in and out of a system at any time.
+  - Chat room participants.
+  - Players in an MMORPG.
+- It makes no sense for them to have direct references to one another.
+  - Those references may go dead.
+- Solution: Have then all refer to some central component that facilitates communication.
+- A component that facilitates communication between other components without them necessarily being aware of each other or having direct (reference) access to each other.
+
+### 7.5.2. Summary
+
+- Create the mediator and have each object in the system refer to it.
+  - C#
+    - E.g., in a field.
+  - Python
+    - E.g., in a property.
+- Mediator engages in bi-directional communication with its connected components.
+- Mediator has functions the components can call.
+- Components have functions the mediator can call.
+- Event processing (e.g., Rx) libraries make communication easier to implement.
+
+## 7.6. Memento
 
 - Keep a memento of an object's state to return to that state.
 
-### 7.5.1. Motivation
+### 7.6.1. Motivation
 
 - An object or system foes through changes.
   - E.g., a bank account gets deposits and withdrawals.
@@ -574,18 +621,18 @@
   - Lets us roll back to the state when the token was generated.
   - May or may not directly expose state information.
 
-### 7.5.2. Summary
+### 7.6.2. Summary
 
 - Mementos are used to roll back states arbitrarily.
-- A memento is simply a token/hnadle class with (typically) no function of its own.
+- A memento is simply a token/handle class with (typically) no function of its own.
 - A memento is not required to expose directly the state(s) to which it reverts the system.
 - Can be used to implement undo/redo.
 
-## 7.6. Null Object
+## 7.7. Null Object
 
 - A behavioral design pattern with no behaviors.
 
-### 7.6.1. Motivation
+### 7.7.1. Motivation
 
 - When component `A` uses component `B`, it typically assumes that `B` is non-null.
   - You inject `B`, not `B?` or some `Option<B>`.
@@ -595,7 +642,7 @@
   - Thus, we build a no-op, non-functioning inheritor of `B` and pass it into `A`.
 - A no-op object that conforms to the required interface, satisfying a dependency requirement of some other object.
 
-### 7.6.2. Summary
+### 7.7.2. Summary
 
 - Implement the required interface.
 - Rewrite the methods with empty bodies:
@@ -605,11 +652,11 @@
 - Dynamic construction possible.
   - With associated performance implications.
 
-## 7.7. State
+## 7.8. State
 
 - Fun with Finite State Machines.
 
-### 7.7.1. Motivation
+### 7.8.1. Motivation
 
 - Considerer an ordinary telephone.
 - What you do with it depends on the state of the phone/line.
@@ -621,7 +668,7 @@
 - An object transitions from on state to another (something needs to trigger a transition).
 - A formalized construct which manages state and transitions is called a state machine.
 
-### 7.7.2. Summary
+### 7.8.2. Summary
 
 - Given sufficient complexity, it pays to formally define possible states and events/triggers.
 - Can define:
@@ -630,11 +677,11 @@
   - Guard conditions enabling/disabling a transitions.
   - Default action when no transitions are found for an event.
 
-## 7.8. Strategy
+## 7.9. Strategy
 
 - System behavior partially specified at runtime.
 
-### 7.8.1. Motivation
+### 7.9.1. Motivation
 
 - Many algorithms can be decomposed into higher and lower level parts.
 - Making tea can be decomposed into:
@@ -645,17 +692,17 @@
 - Enables the exact behavior of a system to be selected at run-time.
 - Also know as a _policy_ (esp. in the C++ world).
 
-### 7.8.2. Summary
+### 7.9.2. Summary
 
 - Define an algorithm at a high level.
 - Define the interface you expect each strategy to follow.
 - Provide for dynamic composition of strategies in the resulting object.
 
-## 7.9. Template Method
+## 7.10. Template Method
 
 - A high-level blueprint for an algorithm to be completed by inheritors.
 
-### 7.9.1. Motivation
+### 7.10.1. Motivation
 
 - Algorithms can be decomposed into common parts + specifics.
 - Strategy pattern does this through composition.
@@ -667,18 +714,18 @@
   - Parent template method invoked.
 - Template Method, allows us to define the "skeleton" of the algorithm, with concrete implementations defined in subclasses.
 
-### 7.9.2. Summary
+### 7.10.2. Summary
 
 - Define an algorithm at a high level.
 - Define constituent parts as abstract method/properties.
 - Inherit the algorithm class providing necessary overrides.
 
-## 7.10. Visitor
+## 7.11. Visitor
 
 - Allows adding extra behaviors to entire hierarchies of classes.
 - Typically a tool for structure traversal rather than anything else.
 
-### 7.10.1. Motivation
+### 7.11.1. Motivation
 
 - Need to define a new operation on an entire class hierarchy.
   - E.g., make a document model printable to HTML/Markdown
@@ -690,7 +737,7 @@
 - A pattern where a component (visitor) is allowed to traverse the entire inheritance hierarchy.
 - Implemented by propagating a single `visit()` method throughout the entire hierarchy.
 
-### 7.10.2. Summary
+### 7.11.2. Summary
 
 - C#
   - Propagate an accept `(Visitor visitor)` method throughout the entire hierarchy.
@@ -702,7 +749,7 @@
   - Make a visitor, decorating each "overload" with `@visitor`.
   - Call `visit()` and the entire structure gets traversed.
 
-## 7.11. Behavioral Summary
+## 7.12. Behavioral Summary
 
 # 8. Duck Typing Mixins
 
@@ -721,6 +768,7 @@
   - State
   - Strategy
   - Command
+  - Iterator
 - Very very very specific uses:
   - Flyweight (Performance)
-  - Interpreter (Compilator/Interepretor)
+  - Interpreter (Compilator/Interpreter)
