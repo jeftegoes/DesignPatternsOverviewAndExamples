@@ -661,9 +661,29 @@
 
 ### 7.8.1. Motivation
 
-- 
+- We need to be informed when certain things happen.
+  - Object's property changes.
+  - Object does somenthing.
+  - Some external event occurs.
+- We want to listen to events and be notified when they occur.
+  - Notifications should include useful data.
+- Want to unsubscribe from events if we're no longer interested.
+- Built into C# with the `event` keyword:
+  - But then what is this `IObservable<T>` / `IObserver<T>` for?
+  - What about `InotifyPropertyChanging`/`Changed`?
+  - And what are `BindingList<T>` / `ObservableCollection<T>`?
+- An observer is an object that wishes to be informed about events happening in the system.
+  - The entity generating the events in an observable.
 
 ### 7.8.2. Summary
+
+- Observer is an intrusive approach: an observable must provide an event to subscribe to.
+- Subscription and unsubscription handled with addition/removal of items in a list.
+- Property notification are easy; dependent property notifications are tricky.
+- C#
+  - Special care must be taken to prevent issues in multithreaded scenarios.
+  - .NET comes with observable collections
+  - `IObserver<T>` / `IObservable<T>` are used in stream processing (Reactive Extension).
 
 ## 7.9. State
 

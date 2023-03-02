@@ -2,5 +2,5 @@ from abc import ABC
 
 
 class Mediator(ABC):
-    def notify(self, sender: object, event: str) -> None:
+    def notify(self, message: str) -> None:
         pass

@@ -10,11 +10,11 @@ class ConcreteMediator(Mediator):
         self._component2 = component2
         self._component2.mediator = self
 
-    def notify(self, sender: object, event: str) -> None:
-        if event == "A":
+    def notify(self, message: str) -> None:
+        if message == "A":
             print("Mediator reacts on A and triggers following operations:")
             self._component2.do_c()
-        elif event == "D":
+        elif message == "D":
             print("Mediator reacts on D and triggers following operations:")
             self._component1.do_b()
             self._component2.do_c()
