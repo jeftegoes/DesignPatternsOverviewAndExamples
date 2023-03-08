@@ -133,6 +133,8 @@
 - Ambient Context
 - Specification
 - Unit of work
+- Notification
+- CQRS
 
 # 4. Gamma categorization
 
@@ -615,7 +617,7 @@
 
 ### 7.6.1. Motivation
 
-- An object or system foes through changes.
+- An object or system goes through changes.
   - E.g., a bank account gets deposits and withdrawals.
 - There are different ways of navigating those changes.
 - One way is to record every change (Command) and teach a command to "undo" itself.
@@ -784,6 +786,47 @@
 
 ## 7.13. Behavioral Summary
 
+- **Chain of Responsibility:**
+  - Allow components to process information/events in a chain.
+  - Each element in the chain refers to next element.
+    - Or make a list and go through it.
+- **Command:**
+  - Encapsulate a request into a separate object.
+  - Good for audit, replay, undo/redo.
+  - Part of CQS/CQRS (Query is also, effectively, a command).
+- **Interpreter:**
+  - Transform textual input into object-oriented structures.
+  - Used by interpreters, compilers, static analysis tool, etc.
+  - _Compiler Theory_ is a separate branch of Computer Science.
+- **Iterator:**
+  - Provides an interface for accessing elements of an aggregate object.
+  - C#
+    - `IEnumerable<T>` should be used in 99% of cases.
+  - Python
+    - `__iter__` / `__next` are stateful, but yield is much more convenient.
+- **Mediator:**
+  - Provides mediation services between two objects.
+  - E.g., message passing, chat room
+- **Memento:**
+  - Yields tokens representing system states.
+  - Tokens do not allow direct manipulation, but can be used in appropriate APIs.
+- **Observer:**
+  - Allows notifications of changes/happenings in a component.
+  - C#
+    - Built with the `event` keyword.
+    - Additional support provided for properties, collections and observable streams.
+- **State:**
+  - We model systems by having one of a possible states and transitions between these states.
+  - Such a system if called a **state machine**.
+  - Special frameworks exists to orchestrate state machines.
+- **Strategy and Template Method**
+  - Both patterns define an algorithm blueprint/placeholder.
+  - Strategy uses ordinary composition, Template Method uses inheritance.
+- **Visitor:**
+  - Adding functionality to existing classes through double dispatch.
+  - C#
+    - `Dynamic` visitor possible, but with performance cost.
+
 # 8. Duck Typing Mixins
 
 - The `IScalar<T>` mixing is a real-world mixing.
@@ -799,7 +842,7 @@
   - Decorator
   - Proxy
   - State
-  - Strategy
+  - Strategy (Composition) / Template method (Inheritance)
   - Command
   - Iterator
 - Very very very specific uses:
