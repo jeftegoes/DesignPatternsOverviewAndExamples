@@ -1,3 +1,5 @@
+from math import cos, sin
+
 from point_intersect import PointIntersect
 
 
