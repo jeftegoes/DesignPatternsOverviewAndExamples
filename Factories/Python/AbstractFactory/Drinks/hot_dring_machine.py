@@ -1,4 +1,6 @@
 from available_drink import AvailableDrink
+from coffee_factory import CoffeeFactory
+from tea_factory import TeaFactory
 
 
 class HotDrinkMachine:
@@ -10,11 +12,10 @@ class HotDrinkMachine:
         if not self.initialized:
             self.initialized = True
             for available_drink in AvailableDrink:
-                name = available_drink.name[0] + \
-                    available_drink.name[1:].lower()
+                name = available_drink.name[0] + available_drink.name[1:].lower()
                 factory_name = name + "Factory"
                 factory_instance = eval(factory_name)()
-                self.factories.append(name, factory_instance)
+                self.factories.append((name, factory_instance))
 
     def make_drink(self):
         print("Available drinks:")
@@ -25,4 +26,4 @@ class HotDrinkMachine:
         index = int(s)
         s = input(f"Specify amount: ")
         amount = int(s)
-        return self.factories[index][1].prepare()
+        return self.factories[index][1].prepare(amount)
