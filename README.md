@@ -4,6 +4,9 @@
 
 - [1. Overview](#1-overview)
 - [2. The Patterns](#2-the-patterns)
+  - [2.1. Creational](#21-creational)
+  - [2.2. Structural](#22-structural)
+  - [2.3. Behavioral](#23-behavioral)
 - [3. Others patterns](#3-others-patterns)
 - [4. Gamma categorization](#4-gamma-categorization)
 - [5. Creational](#5-creational)
@@ -90,42 +93,47 @@
 - Design pattern are common architectural approaches.
 - Popularized by the [Gang of Four book (1994)](http://wiki.c2.com/?GangOfFour).
   - Smaltalk and C++
-- Translated to many OOP languages
-  - C#, Java, Python, ...
+- Translated to many OOP languages:
+  - C#, Java, Python, JavaScript...
 - Universally relevant.
   - Internalized in some programming languages.
   - Libraries.
 
 # 2. The Patterns
 
-- Creational
-  - Builder
-  - Factories
-    - Abstract factory
-    - Factory Method
-  - Prototype
-  - Singleton
-- Structural
-  - Adapter
-  - Bridge
-  - Composite
-  - Decorator
-  - Façade
-  - Flyweight <<< BACK HERE WITH .NET BENCHMARK>>>
-  - Proxy
-- Behavioral
-  - Chain of responsibility
-  - Command
-  - Interpreter
-  - Iterator
-  - Mediator
-  - Memento
-  - Null Object
-  - Observer
-  - State
-  - Strategy
-  - Template Method
-  - Visitor
+## 2.1. Creational
+
+- Builder
+- Factories
+  - Abstract factory
+  - Factory Method
+- Prototype
+- Singleton
+
+## 2.2. Structural
+
+- Adapter
+- Bridge
+- Composite
+- Decorator
+- Façade
+- Flyweight <<< BACK HERE WITH .NET BENCHMARK>>>
+- Proxy
+
+## 2.3. Behavioral
+
+- Chain of responsibility
+- Command
+- Interpreter
+- Iterator
+- Mediator
+- Memento
+- Null Object
+- Observer
+- State
+- Strategy
+- Template Method
+- Visitor
 
 # 3. Others patterns
 
