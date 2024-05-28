@@ -146,17 +146,17 @@
 
 # 4. Gamma categorization
 
-- Design Patters are typically split in to three categories.
-- This is called Gamma Categorization after Erick Gamma, one of GoF authors.
-- Create patterns:
+- Design Patters are typically split into three categories.
+- This is called *Gamma Categorization* after Erick Gamma, one of GoF authors.
+- **Create patterns**
   - Deal with the creation (construction) of objects.
   - Explicit (constructor) vs. implicit (DI, reflection, etc.).
   - Wholesale (single statement) vs. piecewise (step-by-step).
-- Structural patters:
+- **Structural patters**
   - Concerned with the structure (e.g., class members).
   - Many patterns are wrappers that mimic the underlying class interface.
   - Stress the important of good API design.
-- Behavioral patterns:
+- **Behavioral patterns**
   - They are all different, no central theme.
 
 # 5. Creational
@@ -286,7 +286,7 @@
 ## 6.1. Adapter
 
 - Getting the interface you want from the interface you have.
-- A construct which adapt an existing interface X to conform to the required interface Y.
+- A construct which adapt an existing interface **X** to conform to the required interface **Y**.
 
 ### 6.1.1. Motivation
 
