@@ -147,7 +147,7 @@
 # 4. Gamma categorization
 
 - Design Patters are typically split into three categories.
-- This is called *Gamma Categorization* after Erick Gamma, one of GoF authors.
+- This is called _Gamma Categorization_ after Erick Gamma, one of GoF authors.
 - **Create patterns**
   - Deal with the creation (construction) of objects.
   - Explicit (constructor) vs. implicit (DI, reflection, etc.).
@@ -189,10 +189,11 @@
 
 - Object creation logic becomes too convoluted.
 - Initializer (Constructor) is not descriptive.
-  - Python
-    - Name is always `__init__`
-  - C#
+  - C# / Java
     - Name mandated by name of containing type.
+    - Name mandated by name of containing type.
+  - Python
+    - Name is always `__init__`.
   - Cannot overload with same sets of arguments with different names.
   - Can turn into "optional parameter hell".
 - Wholesale object creation (non-piecewise, unlike Builder) can be outsourced to:
